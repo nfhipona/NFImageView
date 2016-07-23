@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'NFImageView_Example' do
+  pod 'NFImageView', :path => '../'
+
+  target 'NFImageView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
