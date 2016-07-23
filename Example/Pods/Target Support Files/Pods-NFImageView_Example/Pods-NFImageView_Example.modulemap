@@ -1,0 +1,6 @@
+framework module Pods_NFImageView_Example {
+  umbrella header "Pods-NFImageView_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

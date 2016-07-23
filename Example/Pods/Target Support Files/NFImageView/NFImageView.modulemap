@@ -1,0 +1,6 @@
+framework module NFImageView {
+  umbrella header "NFImageView-umbrella.h"
+
+  export *
+  module * { export * }
+}
