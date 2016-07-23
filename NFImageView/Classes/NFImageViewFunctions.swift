@@ -3,7 +3,7 @@
 //  Pods
 //
 //  Created by Neil Francis Hipona on 23/07/2016.
-//
+//  Copyright (c) 2016 Neil Francis Ramirez Hipona. All rights reserved.
 //
 
 import Foundation
