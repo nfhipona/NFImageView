@@ -30,7 +30,7 @@ public class NFImageView: UIView {
     
     // MARK: - Public property
     
-    public var contentViewMode: ViewContentMode = .Fill
+    public var contentViewMode: ViewContentMode = .AspectFill
     public var contentViewFill: ViewContentFill = .Center
     public var loadingType: NFImageViewLoadingType = .Default
     
