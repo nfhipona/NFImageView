@@ -84,8 +84,15 @@ public class NFImageView: UIView {
         
         backgroundColor = .clearColor()
         userInteractionEnabled = false
+        
+        setNeedsDisplay()
     }
 
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        setNeedsDisplay()
+    }
+    
     // MARK: - Drawing
     
     public override func drawRect(rect: CGRect) {
