@@ -98,9 +98,6 @@ public class NFImageView: UIView {
         // get content rect
         let contentRect = contentModeRectForImage(image)
         
-        // get image scale or the device scale
-        let scale = image.scale ?? UIScreen.mainScreen().scale
-        
         // saves the graphics state
         CGContextSaveGState(context)
         
@@ -109,7 +106,7 @@ public class NFImageView: UIView {
         CGContextScaleCTM(context, 1.0, -1.0)
         
         // Scale the context so that the image is rendered at the correct size for the zoom level.
-        CGContextScaleCTM(context, scale, scale)
+        CGContextScaleCTM(context, 1.0, 1.0)
         
         // draw the image
         if highlighted {
