@@ -51,19 +51,21 @@ class ViewController: UIViewController {
         imageView2.loadingType = .Progress
         imageView2.setImageFromURLString(largeImageProgress)
         
-//        imageView4.loadingEnabled = false
-        imageView4.loadingType = .Spinner
-        imageView4.setThumbImageAndLargeImageFromURLString(thumbURLString: thumbnail2, largeURLString: largeImage2)
-        
         // using highlighted image and setting 'contentViewMode' and 'contentViewFill'
         
         imageView3.loadingType = .Progress
-        imageView3.contentViewMode = .AspectRatio
-        imageView3.contentViewFill = .Center
+        imageView3.contentViewMode = .AspectFit
+        imageView3.contentViewFill = .TopRight
         imageView3.highlighted = true
         imageView3.tintColor = .redColor()
         imageView3.highlightedImage = UIImage(named: "smartphone") // UIImage(named: "TestImage")
 
+//        imageView4.loadingEnabled = false
+        imageView4.loadingType = .Spinner
+        imageView4.contentViewMode = .AspectFit
+        imageView4.contentViewFill = .TopLeft
+        imageView4.setThumbImageAndLargeImageFromURLString(thumbURLString: thumbnail2, largeURLString: largeImage2)
+        
     }
     
     override func didReceiveMemoryWarning() {
