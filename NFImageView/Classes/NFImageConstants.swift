@@ -29,9 +29,9 @@ public typealias NFImageViewRequestCompletion = (code: NFImageViewRequestCode, e
 public enum ViewContentMode: Int {
     
     case Fill // will fill the entire bounds
-    case AspectRatio // image size is retained
     case AspectFit // contents scaled to fit with fixed aspect. remainder is transparent
     case AspectFill // contents scaled to fill with fixed aspect. some portion of content may be clipped.
+    case OriginalSize // image size is retained
 }
 
 public struct ViewContentFill: OptionSetType {

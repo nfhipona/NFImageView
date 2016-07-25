@@ -153,16 +153,18 @@ public class NFImageView: UIView {
         
         switch contentViewMode {
             
-        case .AspectRatio: // image size is retained
+        case .OriginalSize: // image size is retained
             return caculateContentViewFillRectForImageSize(imageSize)
             
         case .AspectFit: // contents scaled to fit with fixed aspect. remainder is transparent
             
             var scaling: CGFloat = 1.0
+            let boundsMinSize = bounds.width < bounds.height ? bounds.width : bounds.height
+            
             if imageSize.width < imageSize.height {
-                scaling = bounds.width / imageSize.width
+                scaling = boundsMinSize / imageSize.width
             }else{
-                scaling = bounds.height / imageSize.height
+                scaling = boundsMinSize / imageSize.height
             }
             
             let scaledImageSize = CGSize(width: imageSize.width * scaling, height: imageSize.height * scaling)
@@ -171,10 +173,12 @@ public class NFImageView: UIView {
         case .AspectFill: // contents scaled to fill with fixed aspect. some portion of content will be clipped.
             
             var scaling: CGFloat = 1.0
+            let boundsMaxSize = bounds.width > bounds.height ? bounds.width : bounds.height
+            
             if imageSize.width > imageSize.height {
-                scaling = bounds.width / imageSize.width
+                scaling = boundsMaxSize / imageSize.width
             }else{
-                scaling = bounds.height / imageSize.height
+                scaling = boundsMaxSize / imageSize.height
             }
             
             let scaledImageSize = CGSize(width: imageSize.width * scaling, height: imageSize.height * scaling)
