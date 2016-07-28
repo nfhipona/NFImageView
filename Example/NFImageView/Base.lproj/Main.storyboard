@@ -17,46 +17,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QFP-ms-iAT" customClass="NFImageView" customModule="NFImageView">
-                                <rect key="frame" x="0.0" y="0.0" width="299" height="160"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6wI-3o-M6O" customClass="NFImageView" customModule="NFImageView">
+                                <rect key="frame" x="0.0" y="380" width="600" height="220"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vfp-oz-v5r" customClass="NFImageView" customModule="NFImageView">
+                                <rect key="frame" x="0.0" y="160" width="600" height="220"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2U-yf-jFB" customClass="NFImageView" customModule="NFImageView">
+                                <rect key="frame" x="300" y="0.0" width="300" height="160"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="TestImage"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LV3-qx-wzu" customClass="NFImageView" customModule="NFImageView">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="4tA-50-S4h"/>
+                                    <constraint firstAttribute="height" constant="160" id="Gns-I6-2qO"/>
                                 </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yV3-kn-3gz" customClass="NFImageView" customModule="NFImageView">
-                                <rect key="frame" x="301" y="0.0" width="299" height="160"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="edM-z9-EZW" customClass="NFImageView" customModule="NFImageView">
-                                <rect key="frame" x="0.0" y="162" width="600" height="218"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aAM-Qj-R0z" customClass="NFImageView" customModule="NFImageView">
-                                <rect key="frame" x="0.0" y="382" width="600" height="218"/>
-                            </imageView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="smartphone"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="edM-z9-EZW" secondAttribute="trailing" id="3Gg-f0-peh"/>
-                            <constraint firstItem="aAM-Qj-R0z" firstAttribute="top" secondItem="edM-z9-EZW" secondAttribute="bottom" constant="2" id="5Vz-lv-6hX"/>
-                            <constraint firstItem="QFP-ms-iAT" firstAttribute="width" secondItem="yV3-kn-3gz" secondAttribute="width" id="8w7-lZ-nkt"/>
-                            <constraint firstItem="QFP-ms-iAT" firstAttribute="top" secondItem="wE1-Fn-QSP" secondAttribute="top" id="AaY-G7-ehu"/>
-                            <constraint firstAttribute="trailing" secondItem="aAM-Qj-R0z" secondAttribute="trailing" id="Cs1-DJ-5Kw"/>
-                            <constraint firstItem="edM-z9-EZW" firstAttribute="leading" secondItem="wE1-Fn-QSP" secondAttribute="leading" id="I7U-4i-VKr"/>
-                            <constraint firstItem="yV3-kn-3gz" firstAttribute="top" secondItem="wE1-Fn-QSP" secondAttribute="top" id="Lmr-sn-fpt"/>
-                            <constraint firstItem="yV3-kn-3gz" firstAttribute="leading" secondItem="QFP-ms-iAT" secondAttribute="trailing" constant="2" id="T9x-HN-9GP"/>
-                            <constraint firstAttribute="trailing" secondItem="yV3-kn-3gz" secondAttribute="trailing" id="qR0-gk-4oG"/>
-                            <constraint firstItem="aAM-Qj-R0z" firstAttribute="leading" secondItem="wE1-Fn-QSP" secondAttribute="leading" id="rxg-ed-QHZ"/>
-                            <constraint firstItem="aAM-Qj-R0z" firstAttribute="height" secondItem="edM-z9-EZW" secondAttribute="height" id="s0O-qe-pf0"/>
-                            <constraint firstItem="QFP-ms-iAT" firstAttribute="leading" secondItem="wE1-Fn-QSP" secondAttribute="leading" id="sqP-DZ-3yU"/>
-                            <constraint firstItem="QFP-ms-iAT" firstAttribute="height" secondItem="yV3-kn-3gz" secondAttribute="height" id="xdv-iF-6kC"/>
-                            <constraint firstItem="OFe-DZ-UAY" firstAttribute="top" secondItem="aAM-Qj-R0z" secondAttribute="bottom" id="y0N-1U-u0m"/>
-                            <constraint firstItem="edM-z9-EZW" firstAttribute="top" secondItem="QFP-ms-iAT" secondAttribute="bottom" constant="2" id="zVX-ay-v3t"/>
+                            <constraint firstItem="F2U-yf-jFB" firstAttribute="bottom" secondItem="LV3-qx-wzu" secondAttribute="bottom" id="AQ4-Yb-qcV"/>
+                            <constraint firstItem="F2U-yf-jFB" firstAttribute="top" secondItem="LV3-qx-wzu" secondAttribute="top" id="Cny-j2-ZOo"/>
+                            <constraint firstItem="6wI-3o-M6O" firstAttribute="leading" secondItem="wE1-Fn-QSP" secondAttribute="leading" id="JET-lm-m8E"/>
+                            <constraint firstItem="Vfp-oz-v5r" firstAttribute="top" secondItem="F2U-yf-jFB" secondAttribute="bottom" id="Y2V-jV-JYr"/>
+                            <constraint firstAttribute="trailing" secondItem="Vfp-oz-v5r" secondAttribute="trailing" id="ZGq-M5-ThF"/>
+                            <constraint firstItem="6wI-3o-M6O" firstAttribute="height" secondItem="Vfp-oz-v5r" secondAttribute="height" id="cOn-Ws-JPV"/>
+                            <constraint firstItem="6wI-3o-M6O" firstAttribute="top" secondItem="Vfp-oz-v5r" secondAttribute="bottom" id="csj-lt-bl1"/>
+                            <constraint firstItem="OFe-DZ-UAY" firstAttribute="top" secondItem="6wI-3o-M6O" secondAttribute="bottom" id="gAv-Eu-h1q"/>
+                            <constraint firstItem="Vfp-oz-v5r" firstAttribute="leading" secondItem="wE1-Fn-QSP" secondAttribute="leading" id="gwZ-n3-cfN"/>
+                            <constraint firstItem="F2U-yf-jFB" firstAttribute="leading" secondItem="LV3-qx-wzu" secondAttribute="trailing" id="h1W-v2-0BZ"/>
+                            <constraint firstAttribute="trailing" secondItem="6wI-3o-M6O" secondAttribute="trailing" id="i2Z-Ev-Inu"/>
+                            <constraint firstItem="LV3-qx-wzu" firstAttribute="top" secondItem="wE1-Fn-QSP" secondAttribute="top" id="lpM-3p-vKV"/>
+                            <constraint firstAttribute="trailing" secondItem="F2U-yf-jFB" secondAttribute="trailing" id="mSP-YE-lrs"/>
+                            <constraint firstItem="LV3-qx-wzu" firstAttribute="leading" secondItem="wE1-Fn-QSP" secondAttribute="leading" id="xzQ-a7-LMB"/>
+                            <constraint firstItem="F2U-yf-jFB" firstAttribute="width" secondItem="LV3-qx-wzu" secondAttribute="width" id="zEQ-bl-YGh"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imageView1" destination="QFP-ms-iAT" id="PYn-gS-vyY"/>
-                        <outlet property="imageView2" destination="yV3-kn-3gz" id="kws-f5-e1v"/>
-                        <outlet property="imageView3" destination="edM-z9-EZW" id="OXo-AV-L8P"/>
-                        <outlet property="imageView4" destination="aAM-Qj-R0z" id="Dvj-kZ-LQk"/>
+                        <outlet property="imageView1" destination="LV3-qx-wzu" id="4VA-3V-CaM"/>
+                        <outlet property="imageView2" destination="F2U-yf-jFB" id="kUF-9L-dgN"/>
+                        <outlet property="imageView3" destination="Vfp-oz-v5r" id="eYy-al-nUH"/>
+                        <outlet property="imageView4" destination="6wI-3o-M6O" id="Fyn-dP-qFB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdN-OU-KDP" sceneMemberID="firstResponder"/>
@@ -64,4 +74,8 @@
             <point key="canvasLocation" x="245" y="312"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="TestImage" width="493" height="638"/>
+        <image name="smartphone" width="256" height="256"/>
+    </resources>
 </document>

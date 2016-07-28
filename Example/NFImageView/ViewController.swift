@@ -45,17 +45,20 @@ class ViewController: UIViewController {
         
 //        imageView1.loadingEnabled = false
         imageView1.loadingType = .Spinner
-        imageView1.setImageFromURLString(largeImageSpinner)
+        imageView1.contentViewMode = .AspectFit
+//        imageView1.setImageFromURLString(largeImageSpinner)
         
 //        imageView2.loadingEnabled = false
         imageView2.loadingType = .Progress
-        imageView2.setImageFromURLString(largeImageProgress)
+        imageView2.contentViewMode = .AspectFit
+        imageView2.contentViewFill = .TopRight
+//        imageView2.setImageFromURLString(largeImageProgress)
         
         // using highlighted image and setting 'contentViewMode' and 'contentViewFill'
         
         imageView3.loadingType = .Progress
         imageView3.contentViewMode = .AspectFit
-        imageView3.contentViewFill = .TopRight
+        imageView3.contentViewFill = .Center
         imageView3.highlighted = true
         imageView3.tintColor = .redColor()
         imageView3.highlightedImage = UIImage(named: "smartphone") // UIImage(named: "TestImage")
@@ -63,7 +66,7 @@ class ViewController: UIViewController {
 //        imageView4.loadingEnabled = false
         imageView4.loadingType = .Spinner
         imageView4.contentViewMode = .AspectFit
-        imageView4.contentViewFill = .TopLeft
+        imageView4.contentViewFill = .Center
         imageView4.setThumbImageAndLargeImageFromURLString(thumbURLString: thumbnail2, largeURLString: largeImage2)
         
     }
