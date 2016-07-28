@@ -27,7 +27,7 @@ it, simply add the following line to your Podfile:
 
 ```ruby
 platform :ios, '8.0'
-use_frameworks! # remove this if this will be use in ObjC code.
+use_frameworks! # remove this if this will be used in ObjC code.
 
 pod "NFImageView"
 ```
