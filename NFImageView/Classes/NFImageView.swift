@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import AlamofireImage
 
+@IBDesignable
 public class NFImageView: UIView {
     
     // MARK: - Private property
@@ -34,19 +35,21 @@ public class NFImageView: UIView {
     public var contentViewFill: ViewContentFill = .Center
     public var loadingType: NFImageViewLoadingType = .Default
     
-    public var loadingEnabled: Bool = true
+    // MARK: - IBInspectables
     
-    public var highlighted: Bool = false {
+    @IBInspectable public var loadingEnabled: Bool = true
+    
+    @IBInspectable public var highlighted: Bool = false {
         didSet { setNeedsDisplay() }
     }
     
     // default is nil
-    public var image: UIImage? {
+    @IBInspectable public var image: UIImage? {
         didSet { setNeedsDisplay() }
     }
     
     // default is nil
-    public var highlightedImage: UIImage? {
+    @IBInspectable public var highlightedImage: UIImage? {
         didSet { setNeedsDisplay() }
     }
     
@@ -166,14 +169,31 @@ public class NFImageView: UIView {
         case .AspectFit: // contents scaled to fit with fixed aspect. remainder is transparent
             
             var scaling: CGFloat = 1.0
-            let boundsMinSize = bounds.width < bounds.height ? bounds.width : bounds.height
-            
-            if imageSize.width < imageSize.height {
-                scaling = boundsMinSize / imageSize.width
+            let boundsImageMaxSize = imageSize.width > imageSize.height ? imageSize.width : imageSize.height
+
+            // get max container bounds
+            if bounds.width > bounds.height {
+                // get max scale of max image bounds to container max bounds
+                let maxScale = bounds.width / boundsImageMaxSize
+                // check if image height would exceed the container bounds
+                if imageSize.height * maxScale > bounds.height {
+                    // use the image height if it exceeds the bounds of the container
+                    scaling = bounds.height / imageSize.height
+                }else{
+                    scaling = maxScale
+                }
             }else{
-                scaling = boundsMinSize / imageSize.height
+                // get max scale of max image bounds to container max bounds
+                let maxScale = bounds.height / boundsImageMaxSize
+                // check if image height would exceed the container bounds
+                if imageSize.width * maxScale > bounds.width {
+                    // use the image height if it exceeds the bounds of the container
+                    scaling = bounds.width / imageSize.width
+                }else{
+                    scaling = maxScale
+                }
             }
-            
+
             let scaledImageSize = CGSize(width: imageSize.width * scaling, height: imageSize.height * scaling)
             return caculateContentViewFillRectForImageSize(scaledImageSize)
             
@@ -182,7 +202,7 @@ public class NFImageView: UIView {
             var scaling: CGFloat = 1.0
             let boundsMaxSize = bounds.width > bounds.height ? bounds.width : bounds.height
             
-            if imageSize.width > imageSize.height {
+            if imageSize.width < imageSize.height {
                 scaling = boundsMaxSize / imageSize.width
             }else{
                 scaling = boundsMaxSize / imageSize.height
