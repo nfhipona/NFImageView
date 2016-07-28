@@ -5,20 +5,6 @@
 [![License](https://img.shields.io/cocoapods/l/NFImageView.svg?style=flat)](http://cocoapods.org/pods/NFImageView)
 [![Platform](https://img.shields.io/cocoapods/p/NFImageView.svg?style=flat)](http://cocoapods.org/pods/NFImageView)
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-
-## Installation
-
-NFImageView is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod "NFImageView"
-```
 
 ### NFImageView
 - [x] Realtime loading progress.
@@ -28,7 +14,37 @@ pod "NFImageView"
 - [x] Uses CoreGraphics to draw image in context.
 - [x] Supports 'Content Fill Location' : '.Top, .Left, .Right, .Bottom' 
 
-## Usage
+## Requirements
+
+- iOS 8.0+
+- Xcode 7.3
+
+## Installation
+
+#### CocoaPods
+NFImageView is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+platform :ios, '8.0'
+use_frameworks! # remove this if this will be use in ObjC code.
+
+pod "NFImageView"
+```
+
+#### Carthage
+Create a `Cartfile` that lists the framework and run `carthage update`. Follow the [instructions](https://github.com/Carthage/Carthage#if-youre-building-for-ios) to add `$(SRCROOT)/Carthage/Build/iOS/NFImageView.framework` to an iOS project.
+
+```
+github "nferocious76/NFImageView"
+```
+
+#### Manually
+1. Download and drop ```/Pod/Classes``` folder in your project.  
+2. Congratulations!
+
+
+## Usage example
 
 ```Swift
 
@@ -54,6 +70,8 @@ imageview.setThumbImageAndLargeImageFromURLString(thumbURLString: thumbnail, lar
 
 ```
 
+## Contribute
+We would love for you to contribute to `NFImageView`. See the [LICENSE](https://github.com/nferocious76/NFImageView/blob/master/LICENSE) file for more info.
 
 ## Author
 
@@ -61,4 +79,4 @@ Neil Francis Ramirez Hipona, nferocious76@gmail.com
 
 ## License
 
-NFImageView is available under the MIT license. See the LICENSE file for more info.
+NFImageView is available under the MIT license. See the [LICENSE](https://github.com/nferocious76/NFImageView/blob/master/LICENSE) file for more info.
