@@ -20,6 +20,41 @@ it, simply add the following line to your Podfile:
 pod "NFImageView"
 ```
 
+### NFImageView
+- [x] Realtime loading progress.
+- [x] Loading option with progress or spinner.
+- [x] Loading option with blur using thumbnail and a larger image.
+- [x] Prevent loading wrong image when on a table or collection view.
+- [x] Uses CoreGraphics to draw image in context.
+- [x] Supports 'Content Fill Location' : '.Top, .Left, .Right, .Bottom' 
+
+## Usage
+
+```Swift
+
+// link of images
+let thumbnail = "https://scontent.fmnl4-4.fna.fbcdn.net/v/t1.0-9/13529069_10202382982213334_6754953260473113193_n.jpg?oh=28c0f3e751a9177e5ca0afaf23be919e&oe=57F9EEF9"
+let largeImage = "https://scontent.fmnl4-4.fna.fbcdn.net/t31.0-8/13584845_10202382982333337_2990050100601729771_o.jpg"
+
+// NFImageView is like a regular UIImageView, you can either subclass a UIImageView in the IB, just set the module to `NFUIKitUtilities` for the IB to read the class.
+// create an imageview
+let imageview = NFImageView(frame: CGRectMake(0, 0, 100, 100))
+
+// `loadingEnabled` flag is use to force disable any loading that should occur. This will make it load like normal. default to `true`
+// imageView.loadingEnabled = false // set this to disable loading.
+
+// set loading type
+imageview.loadingType = .Spinner
+
+// loading an image without blur effect.
+imageView.setImageFromURLString(largeImage)
+
+// loading an image with blur effect using thumbnail and large image.
+imageview.setThumbImageAndLargeImageFromURLString(thumbURLString: thumbnail, largeURLString: largeImage)
+
+```
+
+
 ## Author
 
 Neil Francis Ramirez Hipona, nferocious76@gmail.com
