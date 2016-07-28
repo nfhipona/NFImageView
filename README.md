@@ -68,6 +68,12 @@ imageView.setImageFromURLString(largeImage)
 // loading an image with blur effect using thumbnail and large image.
 imageview.setThumbImageAndLargeImageFromURLString(thumbURLString: thumbnail, largeURLString: largeImage)
 
+// Set image aspect
+imageView.contentViewMode = .Fill || .AspectFit || .AspectFill || .OriginalSize
+
+// Set image fill location
+imageView.contentViewFill = .Center || .Top || .Left || .Right || .Bottom
+
 ```
 
 ## Contribute
