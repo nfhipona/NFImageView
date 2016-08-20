@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'NFImageView'
   s.version          = '0.1.3'
-  s.summary          = 'A short description of NFImageView.'
+  s.summary          = "'NFImageView' is a subclass of a UIView that acts like a UIImageView. Uses CoreGraphics to draw image."
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
