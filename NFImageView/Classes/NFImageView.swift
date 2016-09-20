@@ -215,6 +215,14 @@ public class NFImageView: UIView {
                 }else{
                     scaling = bounds.height / imageSize.height
                 }
+                
+                if imageSize.width * scaling < bounds.width || imageSize.height * scaling < bounds.height {
+                    if imageSize.width * scaling < bounds.width {
+                        scaling = bounds.width / imageSize.width
+                    }else{
+                        scaling = bounds.height / imageSize.height
+                    }
+                }
             }
             
             let scaledImageSize = CGSize(width: imageSize.width * scaling, height: imageSize.height * scaling)
