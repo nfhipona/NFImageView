@@ -169,12 +169,12 @@ public class NFImageView: UIView {
         case .AspectFit: // contents scaled to fit with fixed aspect. remainder is transparent
             
             var scaling: CGFloat = 1.0
-            let boundsImageMaxSize = imageSize.width > imageSize.height ? imageSize.width : imageSize.height
+            let imageMaxSize = imageSize.width > imageSize.height ? imageSize.width : imageSize.height
 
             // get max container bounds
             if bounds.width > bounds.height {
                 // get max scale of max image bounds to container max bounds
-                let maxScale = bounds.width / boundsImageMaxSize
+                let maxScale = bounds.width / imageMaxSize
                 // check if image height would exceed the container bounds
                 if imageSize.height * maxScale > bounds.height {
                     // use the image height if it exceeds the bounds of the container
@@ -184,7 +184,7 @@ public class NFImageView: UIView {
                 }
             }else{
                 // get max scale of max image bounds to container max bounds
-                let maxScale = bounds.height / boundsImageMaxSize
+                let maxScale = bounds.height / imageMaxSize
                 // check if image height would exceed the container bounds
                 if imageSize.width * maxScale > bounds.width {
                     // use the image height if it exceeds the bounds of the container
