@@ -200,12 +200,21 @@ public class NFImageView: UIView {
         case .AspectFill: // contents scaled to fill with fixed aspect. some portion of content will be clipped.
             
             var scaling: CGFloat = 1.0
-            let boundsMaxSize = bounds.width > bounds.height ? bounds.width : bounds.height
+            let widthMargin = bounds.width - imageSize.width
+            let heightMargin = bounds.height - imageSize.height
             
-            if imageSize.width < imageSize.height {
-                scaling = boundsMaxSize / imageSize.width
+            if abs(widthMargin) < abs(heightMargin) {
+                if widthMargin > heightMargin {
+                    scaling = bounds.width / imageSize.width
+                }else{
+                    scaling = bounds.height / imageSize.height
+                }
             }else{
-                scaling = boundsMaxSize / imageSize.height
+                if widthMargin > heightMargin {
+                    scaling = bounds.width / imageSize.width
+                }else{
+                    scaling = bounds.height / imageSize.height
+                }
             }
             
             let scaledImageSize = CGSize(width: imageSize.width * scaling, height: imageSize.height * scaling)
