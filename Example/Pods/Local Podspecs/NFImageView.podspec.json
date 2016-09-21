@@ -16,15 +16,15 @@
     "tag": "0.1.5"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "source_files": "NFImageView/Classes/**/*",
   "dependencies": {
     "Alamofire": [
-      "~> 3.4"
+      "~> 4.0"
     ],
     "AlamofireImage": [
-      "~> 2.0"
+      "~> 3.0"
     ]
   }
 }
