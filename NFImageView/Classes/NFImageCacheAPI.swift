@@ -10,20 +10,20 @@ import Foundation
 import AlamofireImage
 import Alamofire
 
-public class NFImageCacheAPI: NSObject {
+open class NFImageCacheAPI: NSObject {
     
-    public static let sharedAPI = NFImageCacheAPI()
+    open static let sharedAPI = NFImageCacheAPI()
     
-    public lazy var imageDownloadQueue: dispatch_queue_t = {
-        dispatch_queue_create("com.NFImageDownloadQueue.concurrent", DISPATCH_QUEUE_CONCURRENT)
+    open lazy var imageDownloadQueue: DispatchQueue = {
+        DispatchQueue(label: "com.NFImageDownloadQueue.concurrent", attributes: DispatchQueue.Attributes.concurrent)
     }()
     
-    private let imageRequestCache: AutoPurgingImageCache = {
+    fileprivate let imageRequestCache: AutoPurgingImageCache = {
         AutoPurgingImageCache(memoryCapacity: 150 * 1024 * 1024, preferredMemoryUsageAfterPurge: 60 * 1024 * 1024)
     }()
     
-    private lazy var imageDownloader: ImageDownloader = {
-        ImageDownloader(configuration: ImageDownloader.defaultURLSessionConfiguration(), downloadPrioritization: .LIFO, maximumActiveDownloads: 4, imageCache: self.imageRequestCache)
+    fileprivate lazy var imageDownloader: ImageDownloader = {
+        ImageDownloader(configuration: ImageDownloader.defaultURLSessionConfiguration(), downloadPrioritization: .lifo, maximumActiveDownloads: 4, imageCache: self.imageRequestCache)
     }()
     
     // MARK: - Public Functions
@@ -31,8 +31,8 @@ public class NFImageCacheAPI: NSObject {
     /**
      * Asynchronously download and cache image from a requested URL using AlamofireImage configuration
      */
-    public func downloadImage(requestURL: NSURL, completion: ImageDownloader.CompletionHandler? = nil) -> RequestReceipt? {
-        let request = NSURLRequest(URL: requestURL)
+    open func downloadImage(_ requestURL: URL, completion: ImageDownloader.CompletionHandler? = nil) -> RequestReceipt? {
+        let request = URLRequest(url: requestURL)
         
         return imageDownloader.downloadImage(URLRequest: request, completion: completion)
     }
@@ -40,8 +40,8 @@ public class NFImageCacheAPI: NSObject {
     /**
      * Asynchronously download and cache image from a requested URL using AlamofireImage configuration with progress handler
      */
-    public func downloadImageWithProgress(requestURL: NSURL, progress: ImageDownloader.ProgressHandler?, completion: ImageDownloader.CompletionHandler?) -> RequestReceipt? {
-        let request = NSURLRequest(URL: requestURL)
+    open func downloadImageWithProgress(_ requestURL: URL, progress: ImageDownloader.ProgressHandler?, completion: ImageDownloader.CompletionHandler?) -> RequestReceipt? {
+        let request = URLRequest(url: requestURL)
         
         return imageDownloader.downloadImage(URLRequest: request, progress: progress, completion: completion)
     }
@@ -49,27 +49,27 @@ public class NFImageCacheAPI: NSObject {
     /**
      * Check image cache for url request
      */
-    public func checkForImageContentInCacheStorage(requestURL: NSURL, identifier: String? = nil) -> UIImage? {
+    open func checkForImageContentInCacheStorage(_ requestURL: URL, identifier: String? = nil) -> UIImage? {
         
-        let request = NSURLRequest(URL: requestURL)
+        let request = URLRequest(url: requestURL)
         return imageRequestCache.imageForRequest(request, withAdditionalIdentifier: identifier)
     }
     
     /**
      * Cache image for url request
      */
-    public func cacheImageForRequestURL(image: UIImage, requestURL: NSURL, identifier: String? = nil) {
+    open func cacheImageForRequestURL(_ image: UIImage, requestURL: URL, identifier: String? = nil) {
         
-        let request = NSURLRequest(URL: requestURL)
+        let request = URLRequest(url: requestURL)
         imageRequestCache.addImage(image, forRequest: request, withAdditionalIdentifier: identifier)
     }
     
     /**
      * Remove image from cache for url request
      */
-    public func removeCachedImageForRequestURL(requestURL: NSURL, identifier: String? = nil) {
+    open func removeCachedImageForRequestURL(_ requestURL: URL, identifier: String? = nil) {
         
-        let request = NSURLRequest(URL: requestURL)
+        let request = URLRequest(url: requestURL)
         imageRequestCache.removeImageForRequest(request, withAdditionalIdentifier: identifier)
     }
 }

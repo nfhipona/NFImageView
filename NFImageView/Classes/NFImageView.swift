@@ -11,7 +11,7 @@ import UIKit
 import AlamofireImage
 
 @IBDesignable
-public class NFImageView: UIView {
+open class NFImageView: UIView {
     
     // MARK: - Private property
     
@@ -31,25 +31,25 @@ public class NFImageView: UIView {
     
     // MARK: - Public property
     
-    public var contentViewMode: ViewContentMode = .AspectFill
-    public var contentViewFill: ViewContentFill = .Center
-    public var loadingType: NFImageViewLoadingType = .Default
+    open var contentViewMode: ViewContentMode = .aspectFill
+    open var contentViewFill: ViewContentFill = .Center
+    open var loadingType: NFImageViewLoadingType = .default
     
     // MARK: - IBInspectables
     
-    @IBInspectable public var loadingEnabled: Bool = true
+    @IBInspectable open var loadingEnabled: Bool = true
     
-    @IBInspectable public var highlighted: Bool = false {
+    @IBInspectable open var highlighted: Bool = false {
         didSet { setNeedsDisplay() }
     }
     
     // default is nil
-    @IBInspectable public var image: UIImage? {
+    @IBInspectable open var image: UIImage? {
         didSet { setNeedsDisplay() }
     }
     
     // default is nil
-    @IBInspectable public var highlightedImage: UIImage? {
+    @IBInspectable open var highlightedImage: UIImage? {
         didSet { setNeedsDisplay() }
     }
     
@@ -82,75 +82,75 @@ public class NFImageView: UIView {
         highlightedImage = hImg
     }
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .clearColor()
-        userInteractionEnabled = false
+        backgroundColor = .clear()
+        isUserInteractionEnabled = false
         
         setNeedsDisplay()
     }
 
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         setNeedsDisplay()
     }
     
     // MARK: - Drawing
     
-    public override func drawRect(rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         
         let context = UIGraphicsGetCurrentContext()
         
         // clears the view if there is no image to draw
-        guard let image = highlighted ? highlightedImage : image else { return CGContextDrawImage(context, rect, nil) }
+        guard let image = highlighted ? highlightedImage : image else { return context.draw(nil, in: rect) }
         
         // get content rect
         let contentRect = contentModeRectForImage(image)
         
         // saves the graphics state
-        CGContextSaveGState(context)
+        context?.saveGState()
         
         // flip the context so that the image is rendered right side up.
-        CGContextTranslateCTM(context, 0.0, bounds.height)
-        CGContextScaleCTM(context, 1.0, -1.0)
+        context?.translateBy(x: 0.0, y: bounds.height)
+        context?.scaleBy(x: 1.0, y: -1.0)
         
         // Scale the context so that the image is rendered at the correct size for the zoom level.
-        CGContextScaleCTM(context, 1.0, 1.0)
+        context?.scaleBy(x: 1.0, y: 1.0)
         
         // draw the image
         if highlighted {
             // set blend mode
-            CGContextSetBlendMode(context, .Normal)
+            context?.setBlendMode(.normal)
             
             // get template image
-            let templateImage = image.imageWithRenderingMode(.AlwaysTemplate)
+            let templateImage = image.withRenderingMode(.alwaysTemplate)
             
             // mask image clipping path
-            CGContextClipToMask(context, contentRect, templateImage.CGImage)
+            context?.clip(to: contentRect, mask: templateImage.cgImage!)
 
             // set blend mode
-            CGContextSetBlendMode(context, .Color)
+            context?.setBlendMode(.color)
             
             // set tinting color
-            let tintingColor = tintColor ?? UIColor.blackColor()
+            let tintingColor = tintColor ?? UIColor.black
             tintingColor.set()
             tintingColor.setFill()
             
             // draw image in context
-            CGContextDrawImage(context, contentRect, templateImage.CGImage)
+            context?.draw(templateImage.cgImage!, in: contentRect)
             
             // fill clipped path
             UIRectFill(contentRect)
         }else{
-            CGContextDrawImage(context, contentRect, image.CGImage)
+            context?.draw(image.cgImage!, in: contentRect)
         }
         
         // restores the graphics state
-        CGContextRestoreGState(context)
+        context?.restoreGState()
     }
     
-    public override func tintColorDidChange() {
+    open override func tintColorDidChange() {
         setNeedsDisplay()
     }
     
@@ -158,15 +158,15 @@ public class NFImageView: UIView {
     
     // MARK: - Drawing Helpers
     
-    private func contentModeRectForImage(image: UIImage) -> CGRect {
+    fileprivate func contentModeRectForImage(_ image: UIImage) -> CGRect {
         let imageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
         
         switch contentViewMode {
             
-        case .OriginalSize: // image size is retained
+        case .originalSize: // image size is retained
             return caculateContentViewFillRectForImageSize(imageSize)
             
-        case .AspectFit: // contents scaled to fit with fixed aspect. remainder is transparent
+        case .aspectFit: // contents scaled to fit with fixed aspect. remainder is transparent
             
             var scaling: CGFloat = 1.0
             let imageMaxSize = imageSize.width > imageSize.height ? imageSize.width : imageSize.height
@@ -197,7 +197,7 @@ public class NFImageView: UIView {
             let scaledImageSize = CGSize(width: imageSize.width * scaling, height: imageSize.height * scaling)
             return caculateContentViewFillRectForImageSize(scaledImageSize)
             
-        case .AspectFill: // contents scaled to fill with fixed aspect. some portion of content will be clipped.
+        case .aspectFill: // contents scaled to fill with fixed aspect. some portion of content will be clipped.
             
             var scaling: CGFloat = 1.0
             let widthMargin = bounds.width - imageSize.width
@@ -236,7 +236,7 @@ public class NFImageView: UIView {
         return CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
     }
     
-    private func caculateContentViewFillRectForImageSize(imageSize: CGSize) -> CGRect {
+    fileprivate func caculateContentViewFillRectForImageSize(_ imageSize: CGSize) -> CGRect {
         
         // .Center fill
         var originX: CGFloat = (bounds.width - imageSize.width) / 2
@@ -258,13 +258,13 @@ public class NFImageView: UIView {
         return flipContentRect(contentRect)
     }
     
-    private func flipContentRect(contentRect: CGRect) -> CGRect {
+    fileprivate func flipContentRect(_ contentRect: CGRect) -> CGRect {
         // get transform
-        let transform = CGAffineTransformMakeTranslation(0.0, bounds.height)
+        let transform = CGAffineTransform(translationX: 0.0, y: bounds.height)
         // flip transform
-        let flipTransform = CGAffineTransformScale(transform, 1.0, -1.0)
+        let flipTransform = transform.scaledBy(x: 1.0, y: -1.0)
         // apply transform to target rect
-        let flipContentRect = CGRectApplyAffineTransform(contentRect, flipTransform)
+        let flipContentRect = contentRect.applying(flipTransform)
         
         return flipContentRect
     }
@@ -272,63 +272,63 @@ public class NFImageView: UIView {
     
     // MARK: - Loaders
     
-    private func prepareLoadingIndicator() -> UIActivityIndicatorView {
+    fileprivate func prepareLoadingIndicator() -> UIActivityIndicatorView {
         
         let loadingIndicatorFrame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
         let loadingIndicator = UIActivityIndicatorView(frame: loadingIndicatorFrame)
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = .Gray
+        loadingIndicator.activityIndicatorViewStyle = .gray
         
         addSubview(loadingIndicator)
-        bringSubviewToFront(loadingIndicator)
+        bringSubview(toFront: loadingIndicator)
         
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
-        let top = NSLayoutConstraint(item: loadingIndicator, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: 0.0)
-        let trailing = NSLayoutConstraint(item: loadingIndicator, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1, constant: 0.0)
-        let bottom = NSLayoutConstraint(item: loadingIndicator, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1, constant: 0.0)
-        let leading = NSLayoutConstraint(item: loadingIndicator, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1, constant: 0.0)
+        let top = NSLayoutConstraint(item: loadingIndicator, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0.0)
+        let trailing = NSLayoutConstraint(item: loadingIndicator, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0.0)
+        let bottom = NSLayoutConstraint(item: loadingIndicator, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0.0)
+        let leading = NSLayoutConstraint(item: loadingIndicator, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0.0)
         
         addConstraints([top, trailing, bottom, leading])
         
         return loadingIndicator
     }
     
-    private func prepareLoadingProgressView() -> UIProgressView {
+    fileprivate func prepareLoadingProgressView() -> UIProgressView {
         
-        let progressView = UIProgressView(progressViewStyle: .Default)
-        progressView.progressTintColor = .cyanColor()
-        progressView.trackTintColor = .lightGrayColor()
-        progressView.hidden = true
+        let progressView = UIProgressView(progressViewStyle: .default)
+        progressView.progressTintColor = .cyan()
+        progressView.trackTintColor = .lightGray()
+        progressView.isHidden = true
         progressView.alpha = 0.0
         
         addSubview(progressView)
-        bringSubviewToFront(progressView)
+        bringSubview(toFront: progressView)
         
         progressView.translatesAutoresizingMaskIntoConstraints = false
-        let trailing = NSLayoutConstraint(item: progressView, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1, constant: 0.0)
-        let bottom = NSLayoutConstraint(item: progressView, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1, constant: 0.0)
-        let leading = NSLayoutConstraint(item: progressView, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1, constant: 0.0)
+        let trailing = NSLayoutConstraint(item: progressView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0.0)
+        let bottom = NSLayoutConstraint(item: progressView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0.0)
+        let leading = NSLayoutConstraint(item: progressView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0.0)
         
         self.addConstraints([trailing, bottom, leading])
         
         return progressView
     }
     
-    private func prepareVisualBlurEffectView() -> UIVisualEffectView {
+    fileprivate func prepareVisualBlurEffectView() -> UIVisualEffectView {
         
-        let effect = UIBlurEffect(style: .Light)
+        let effect = UIBlurEffect(style: .light)
         let blurView = UIVisualEffectView(effect: effect)
         blurView.frame = bounds
-        blurView.hidden = true
+        blurView.isHidden = true
         
         addSubview(blurView)
-        sendSubviewToBack(blurView)
+        sendSubview(toBack: blurView)
         
         blurView.translatesAutoresizingMaskIntoConstraints = false
-        let top = NSLayoutConstraint(item: blurView, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: 0.0)
-        let trailing = NSLayoutConstraint(item: blurView, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1, constant: 0.0)
-        let bottom = NSLayoutConstraint(item: blurView, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1, constant: 0.0)
-        let leading = NSLayoutConstraint(item: blurView, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1, constant: 0.0)
+        let top = NSLayoutConstraint(item: blurView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0.0)
+        let trailing = NSLayoutConstraint(item: blurView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0.0)
+        let bottom = NSLayoutConstraint(item: blurView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0.0)
+        let leading = NSLayoutConstraint(item: blurView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0.0)
         
         addConstraints([top, trailing, bottom, leading])
         
@@ -337,11 +337,11 @@ public class NFImageView: UIView {
     
     // MARK: - Request Manager
     
-    internal func loadImageWithSpinner(imageURL: NSURL, completion: NFImageViewRequestCompletion? = nil) {
+    internal func loadImageWithSpinner(_ imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
         if let receipt = requestReceipt {
             receipt.request.cancel()
-            if let canceledURLRequest = receipt.request.request?.URL {
-                dispatch_async(NFImageCacheAPI.sharedAPI.imageDownloadQueue, {
+            if let canceledURLRequest = receipt.request.request?.url {
+                NFImageCacheAPI.sharedAPI.imageDownloadQueue.async(execute: {
                     NFImageCacheAPI.sharedAPI.downloadImage(canceledURLRequest)
                 })
             }
@@ -356,23 +356,23 @@ public class NFImageView: UIView {
                 self.forceStopLoadingState()
                 
                 self.image = image
-                completion?(code: .Success, error: nil)
+                completion?(code: .success, error: nil)
             }else{
-                if let errorCode = response.result.error?.code where errorCode != NFImageViewRequestCode.Canceled.rawValue {
+                if let errorCode = response.result.error?.code , errorCode != NFImageViewRequestCode.canceled.rawValue {
                     self.forceStopLoadingState()
-                    completion?(code: .Unknown, error: response.result.error)
+                    completion?(code: .unknown, error: response.result.error)
                 }else{
-                    completion?(code: .Canceled, error: response.result.error)
+                    completion?(code: .canceled, error: response.result.error)
                 }
             }
         })
     }
     
-    internal func loadImageWithProgress(imageURL: NSURL, shouldContinueLoading: Bool = false, completion: NFImageViewRequestCompletion? = nil) {
+    internal func loadImageWithProgress(_ imageURL: URL, shouldContinueLoading: Bool = false, completion: NFImageViewRequestCompletion? = nil) {
         if let receipt = requestReceipt {
             receipt.request.cancel()
-            if let canceledURLRequest = receipt.request.request?.URL {
-                dispatch_async(NFImageCacheAPI.sharedAPI.imageDownloadQueue, {
+            if let canceledURLRequest = receipt.request.request?.url {
+                NFImageCacheAPI.sharedAPI.imageDownloadQueue.async(execute: {
                     NFImageCacheAPI.sharedAPI.downloadImage(canceledURLRequest)
                 })
             }
@@ -394,16 +394,16 @@ public class NFImageView: UIView {
                 }
                 
                 self.image = image
-                completion?(code: .Success, error: nil)
+                completion?(code: .success, error: nil)
             }else{
-                if let errorCode = response.result.error?.code where errorCode != NFImageViewRequestCode.Canceled.rawValue {
+                if let errorCode = response.result.error?.code , errorCode != NFImageViewRequestCode.canceled.rawValue {
                     if !shouldContinueLoading {
                         self.forceStopLoadingState()
                     }
                     
-                    completion?(code: .Unknown, error: response.result.error)
+                    completion?(code: .unknown, error: response.result.error)
                 }else{
-                    completion?(code: .Canceled, error: response.result.error)
+                    completion?(code: .canceled, error: response.result.error)
                 }
             }
         }
@@ -412,11 +412,11 @@ public class NFImageView: UIView {
     /**
      * Use when loading is disabled
      */
-    internal func loadImage(imageURL: NSURL, completion: NFImageViewRequestCompletion? = nil) {
+    internal func loadImage(_ imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
         if let receipt = requestReceipt {
             receipt.request.cancel()
-            if let canceledURLRequest = receipt.request.request?.URL {
-                dispatch_async(NFImageCacheAPI.sharedAPI.imageDownloadQueue, {
+            if let canceledURLRequest = receipt.request.request?.url {
+                NFImageCacheAPI.sharedAPI.imageDownloadQueue.async(execute: {
                     NFImageCacheAPI.sharedAPI.downloadImage(canceledURLRequest)
                 })
             }
@@ -427,12 +427,12 @@ public class NFImageView: UIView {
             
             if let image = response.result.value {
                 self.image = image
-                completion?(code: .Success, error: nil)
+                completion?(code: .success, error: nil)
             }else{
-                if let errorCode = response.result.error?.code where errorCode != NFImageViewRequestCode.Canceled.rawValue {
-                    completion?(code: .Unknown, error: response.result.error)
+                if let errorCode = response.result.error?.code , errorCode != NFImageViewRequestCode.canceled.rawValue {
+                    completion?(code: .unknown, error: response.result.error)
                 }else{
-                    completion?(code: .Canceled, error: response.result.error)
+                    completion?(code: .canceled, error: response.result.error)
                 }
             }
         })

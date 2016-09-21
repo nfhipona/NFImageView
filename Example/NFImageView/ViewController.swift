@@ -21,10 +21,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        imageView1.contentMode = .ScaleAspectFill
-        imageView2.contentMode = .ScaleAspectFill
-        imageView3.contentMode = .ScaleAspectFill
-        imageView4.contentMode = .ScaleAspectFill
+        imageView1.contentMode = .scaleAspectFill
+        imageView2.contentMode = .scaleAspectFill
+        imageView3.contentMode = .scaleAspectFill
+        imageView4.contentMode = .scaleAspectFill
         
         imageView1.clipsToBounds = true
         imageView2.clipsToBounds = true
@@ -44,28 +44,28 @@ class ViewController: UIViewController {
         let largeImageProgress = "https://scontent.fmnl4-4.fna.fbcdn.net/t31.0-8/13613290_10202383101656320_342503551114701717_o.jpg"
         
 //        imageView1.loadingEnabled = false
-        imageView1.loadingType = .Spinner
-        imageView1.contentViewMode = .AspectFit
+        imageView1.loadingType = .spinner
+        imageView1.contentViewMode = .aspectFit
 //        imageView1.setImageFromURLString(largeImageSpinner)
         
 //        imageView2.loadingEnabled = false
-        imageView2.loadingType = .Progress
-        imageView2.contentViewMode = .AspectFit
+        imageView2.loadingType = .progress
+        imageView2.contentViewMode = .aspectFit
         imageView2.contentViewFill = .TopRight
 //        imageView2.setImageFromURLString(largeImageProgress)
         
         // using highlighted image and setting 'contentViewMode' and 'contentViewFill'
         
-        imageView3.loadingType = .Progress
-        imageView3.contentViewMode = .AspectFit
+        imageView3.loadingType = .progress
+        imageView3.contentViewMode = .aspectFit
         imageView3.contentViewFill = .Center
         imageView3.highlighted = true
-        imageView3.tintColor = .redColor()
+        imageView3.tintColor = .red()
         imageView3.highlightedImage = UIImage(named: "smartphone") // UIImage(named: "TestImage")
 
 //        imageView4.loadingEnabled = false
-        imageView4.loadingType = .Spinner
-        imageView4.contentViewMode = .AspectFit
+        imageView4.loadingType = .spinner
+        imageView4.contentViewMode = .aspectFit
         imageView4.contentViewFill = .Center
         imageView4.setThumbImageAndLargeImageFromURLString(thumbURLString: thumbnail2, largeURLString: largeImage2)
         

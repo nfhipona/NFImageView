@@ -10,31 +10,31 @@ import Foundation
 
 public enum NFImageViewLoadingType: Int {
     
-    case Default
-    case Spinner
-    case Progress
+    case `default`
+    case spinner
+    case progress
 }
 
 public enum NFImageViewRequestCode: Int {
     
-    case Unknown
-    case Success = 4776
-    case Canceled = -999
+    case unknown
+    case success = 4776
+    case canceled = -999
     
 }
 
-public typealias NFImageViewRequestCompletion = (code: NFImageViewRequestCode, error: NSError?) -> Void
+public typealias NFImageViewRequestCompletion = (_ code: NFImageViewRequestCode, _ error: NSError?) -> Void
 
 
 public enum ViewContentMode: Int {
     
-    case Fill // will fill the entire bounds
-    case AspectFit // contents scaled to fit with fixed aspect. remainder is transparent
-    case AspectFill // contents scaled to fill with fixed aspect. some portion of content may be clipped.
-    case OriginalSize // image size is retained
+    case fill // will fill the entire bounds
+    case aspectFit // contents scaled to fit with fixed aspect. remainder is transparent
+    case aspectFill // contents scaled to fill with fixed aspect. some portion of content may be clipped.
+    case originalSize // image size is retained
 }
 
-public struct ViewContentFill: OptionSetType {
+public struct ViewContentFill: OptionSet {
     public let rawValue: Int
     public init(rawValue: Int) { self.rawValue = rawValue }
     

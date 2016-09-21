@@ -17,7 +17,7 @@ extension NFImageView {
     /**
      * Set loading spinner's spinner color
      */
-    public func setLoadingSpinnerColor(color: UIColor) {
+    public func setLoadingSpinnerColor(_ color: UIColor) {
         loadingIndicator.color = color
     }
     
@@ -31,7 +31,7 @@ extension NFImageView {
     /**
      * Set loading spinner's background color
      */
-    public func setLoadingSpinnerBackgroundColor(color: UIColor) {
+    public func setLoadingSpinnerBackgroundColor(_ color: UIColor) {
         loadingIndicator.backgroundColor = color
     }
     
@@ -48,7 +48,7 @@ extension NFImageView {
     /**
      * Set loading progress tint color
      */
-    public func setLoadingProgressViewTintColor(progressTintColor: UIColor?, trackTintColor: UIColor?) {
+    public func setLoadingProgressViewTintColor(_ progressTintColor: UIColor?, trackTintColor: UIColor?) {
         
         loadingProgressView.progressTintColor = progressTintColor
         loadingProgressView.trackTintColor = trackTintColor
@@ -57,7 +57,7 @@ extension NFImageView {
     /**
      * Set loading progress image
      */
-    public func setLoadingProgressViewProgressImage(progressImage: UIImage?, trackImage: UIImage?) {
+    public func setLoadingProgressViewProgressImage(_ progressImage: UIImage?, trackImage: UIImage?) {
         
         loadingProgressView.progressImage = progressImage
         loadingProgressView.trackImage = trackImage
@@ -66,7 +66,7 @@ extension NFImageView {
     /**
      * Set loading progress's progress value
      */
-    public func setLoadingProgressViewProgress(progress: Float, animated: Bool) {
+    public func setLoadingProgressViewProgress(_ progress: Float, animated: Bool) {
         loadingProgressView.setProgress(progress, animated: animated)
     }
 }
