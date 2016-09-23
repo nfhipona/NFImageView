@@ -23,7 +23,7 @@ public enum NFImageViewRequestCode: Int {
     
 }
 
-public typealias NFImageViewRequestCompletion = (code: NFImageViewRequestCode, error: NSError?) -> Void
+public typealias NFImageViewRequestCompletion = (_ code: NFImageViewRequestCode, error: NSError?) -> Void
 
 
 public enum ViewContentMode: Int {
