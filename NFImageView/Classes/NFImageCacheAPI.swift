@@ -34,7 +34,7 @@ open class NFImageCacheAPI: NSObject {
     open func downloadImage(_ requestURL: URL, completion: ImageDownloader.CompletionHandler? = nil) -> RequestReceipt? {
         let request = URLRequest(url: requestURL)
         
-        return imageDownloader.downloadImage(URLRequest: request, completion: completion)
+        return imageDownloader.download(request, completion: completion)
     }
     
     /**
@@ -43,7 +43,7 @@ open class NFImageCacheAPI: NSObject {
     open func downloadImageWithProgress(_ requestURL: URL, progress: ImageDownloader.ProgressHandler?, completion: ImageDownloader.CompletionHandler?) -> RequestReceipt? {
         let request = URLRequest(url: requestURL)
         
-        return imageDownloader.downloadImage(URLRequest: request, progress: progress, completion: completion)
+        return imageDownloader.download(request, progress: progress, completion: completion)
     }
     
     /**
@@ -52,7 +52,7 @@ open class NFImageCacheAPI: NSObject {
     open func checkForImageContentInCacheStorage(_ requestURL: URL, identifier: String? = nil) -> UIImage? {
         
         let request = URLRequest(url: requestURL)
-        return imageRequestCache.imageForRequest(request, withAdditionalIdentifier: identifier)
+        return imageRequestCache.image(for: request, withIdentifier: identifier)
     }
     
     /**
@@ -61,7 +61,7 @@ open class NFImageCacheAPI: NSObject {
     open func cacheImageForRequestURL(_ image: UIImage, requestURL: URL, identifier: String? = nil) {
         
         let request = URLRequest(url: requestURL)
-        imageRequestCache.addImage(image, forRequest: request, withAdditionalIdentifier: identifier)
+        imageRequestCache.add(image, for: request, withIdentifier: identifier)
     }
     
     /**
@@ -70,6 +70,6 @@ open class NFImageCacheAPI: NSObject {
     open func removeCachedImageForRequestURL(_ requestURL: URL, identifier: String? = nil) {
         
         let request = URLRequest(url: requestURL)
-        imageRequestCache.removeImageForRequest(request, withAdditionalIdentifier: identifier)
+        imageRequestCache.removeImage(for: request, withIdentifier: identifier)
     }
 }

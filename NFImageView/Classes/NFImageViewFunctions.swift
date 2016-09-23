@@ -120,10 +120,10 @@ extension NFImageView {
             loadImage(thumbURL, completion: { (code, error) in
                 if code == .success {
                     self.loadImage(largeURL, completion: { (code, error) in
-                        completion?(code: code, error: error)
+                        completion?(code, error)
                     })
                 }else{
-                    completion?(code: code, error: error)
+                    completion?(code, error)
                 }
             })
         }else{
@@ -136,11 +136,11 @@ extension NFImageView {
                         self.loadImageWithProgress(largeURL, completion: { (code, error) in
                             
                             self.blurEffect.isHidden = true
-                            completion?(code: code, error: error)
+                            completion?(code, error)
                         })
                     }else{
                         self.blurEffect.isHidden = true
-                        completion?(code: code, error: error)
+                        completion?(code, error)
                     }
                 })
                 
@@ -150,11 +150,11 @@ extension NFImageView {
                         self.loadImageWithSpinner(largeURL, completion: { (code, error) in
                             
                             self.blurEffect.isHidden = true
-                            completion?(code: code, error: error)
+                            completion?(code, error)
                         })
                     }else{
                         self.blurEffect.isHidden = true
-                        completion?(code: code, error: error)
+                        completion?(code, error)
                     }
                 })
             }

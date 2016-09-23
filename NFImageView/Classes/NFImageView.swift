@@ -31,9 +31,17 @@ open class NFImageView: UIView {
     
     // MARK: - Public property
     
-    open var contentViewMode: ViewContentMode = .aspectFill
-    open var contentViewFill: ViewContentFill = .Center
-    open var loadingType: NFImageViewLoadingType = .default
+    open var contentViewMode: ViewContentMode = .aspectFill {
+        didSet { setNeedsDisplay() }
+    }
+    
+    open var contentViewFill: ViewContentFill = .Center {
+        didSet { setNeedsDisplay() }
+    }
+    
+    open var loadingType: NFImageViewLoadingType = .default {
+        didSet { setNeedsDisplay() }
+    }
     
     // MARK: - IBInspectables
     
@@ -85,7 +93,7 @@ open class NFImageView: UIView {
     open override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .clear()
+        backgroundColor = .clear
         isUserInteractionEnabled = false
         
         setNeedsDisplay()
@@ -100,37 +108,39 @@ open class NFImageView: UIView {
     
     open override func draw(_ rect: CGRect) {
         
-        let context = UIGraphicsGetCurrentContext()
+        guard let context = UIGraphicsGetCurrentContext() else { return }
         
         // clears the view if there is no image to draw
-        guard let image = highlighted ? highlightedImage : image else { return context.draw(nil, in: rect) }
+        guard let image = highlighted ? highlightedImage : image else { return context.clear(rect) }
         
         // get content rect
         let contentRect = contentModeRectForImage(image)
         
         // saves the graphics state
-        context?.saveGState()
+        context.saveGState()
         
         // flip the context so that the image is rendered right side up.
-        context?.translateBy(x: 0.0, y: bounds.height)
-        context?.scaleBy(x: 1.0, y: -1.0)
+        context.translateBy(x: 0.0, y: bounds.height)
+        context.scaleBy(x: 1.0, y: -1.0)
         
         // Scale the context so that the image is rendered at the correct size for the zoom level.
-        context?.scaleBy(x: 1.0, y: 1.0)
+        context.scaleBy(x: 1.0, y: 1.0)
         
         // draw the image
         if highlighted {
             // set blend mode
-            context?.setBlendMode(.normal)
+            context.setBlendMode(.normal)
             
             // get template image
             let templateImage = image.withRenderingMode(.alwaysTemplate)
+            // handle cgimage
+            guard let templateCGImage = templateImage.cgImage else { return context.clear(rect) }
             
             // mask image clipping path
-            context?.clip(to: contentRect, mask: templateImage.cgImage!)
+            context.clip(to: contentRect, mask: templateCGImage)
 
             // set blend mode
-            context?.setBlendMode(.color)
+            context.setBlendMode(.color)
             
             // set tinting color
             let tintingColor = tintColor ?? UIColor.black
@@ -138,16 +148,20 @@ open class NFImageView: UIView {
             tintingColor.setFill()
             
             // draw image in context
-            context?.draw(templateImage.cgImage!, in: contentRect)
+            context.draw(templateCGImage, in: contentRect)
             
             // fill clipped path
             UIRectFill(contentRect)
         }else{
-            context?.draw(image.cgImage!, in: contentRect)
+            // handle cgimage
+            guard let imageCG = image.cgImage else { return context.clear(rect) }
+            
+            // draw image in context
+            context.draw(imageCG, in: contentRect)
         }
         
         // restores the graphics state
-        context?.restoreGState()
+        context.restoreGState()
     }
     
     open override func tintColorDidChange() {
@@ -296,8 +310,8 @@ open class NFImageView: UIView {
     fileprivate func prepareLoadingProgressView() -> UIProgressView {
         
         let progressView = UIProgressView(progressViewStyle: .default)
-        progressView.progressTintColor = .cyan()
-        progressView.trackTintColor = .lightGray()
+        progressView.progressTintColor = .cyan
+        progressView.trackTintColor = .lightGray
         progressView.isHidden = true
         progressView.alpha = 0.0
         
@@ -356,13 +370,13 @@ open class NFImageView: UIView {
                 self.forceStopLoadingState()
                 
                 self.image = image
-                completion?(code: .success, error: nil)
+                completion?(.success, nil)
             }else{
-                if let errorCode = response.result.error?.code , errorCode != NFImageViewRequestCode.canceled.rawValue {
+                if let errorCode = response.response?.statusCode, errorCode != NFImageViewRequestCode.canceled.rawValue {
                     self.forceStopLoadingState()
-                    completion?(code: .unknown, error: response.result.error)
+                    completion?(.unknown, response.result.error as NSError?)
                 }else{
-                    completion?(code: .canceled, error: response.result.error)
+                    completion?(.canceled, response.result.error as NSError?)
                 }
             }
         })
@@ -381,31 +395,28 @@ open class NFImageView: UIView {
         
         forceStartLoadingState()
         
-        requestReceipt = NFImageCacheAPI.sharedAPI.downloadImageWithProgress(imageURL, progress: { (bytesRead, totalBytesRead, totalExpectedBytesToRead) in
+        requestReceipt = NFImageCacheAPI.sharedAPI.downloadImageWithProgress(imageURL, progress: { (progress) in
             
-            let progress = Float(totalBytesRead) / Float(totalExpectedBytesToRead)
-            self.loadingProgressView.setProgress(progress, animated: true)
-            
-        }) { (response) in
-            
-            if let image = response.result.value {
-                if !shouldContinueLoading {
-                    self.forceStopLoadingState()
-                }
-                
-                self.image = image
-                completion?(code: .success, error: nil)
-            }else{
-                if let errorCode = response.result.error?.code , errorCode != NFImageViewRequestCode.canceled.rawValue {
+            self.loadingProgressView.setProgress(Float(progress.fractionCompleted), animated: true)
+            }) { (response) in
+                if let image = response.result.value as UIImage? {
                     if !shouldContinueLoading {
                         self.forceStopLoadingState()
                     }
                     
-                    completion?(code: .unknown, error: response.result.error)
+                    self.image = image
+                    completion?(.success, nil)
                 }else{
-                    completion?(code: .canceled, error: response.result.error)
+                    if let errorCode = response.response?.statusCode, errorCode != NFImageViewRequestCode.canceled.rawValue {
+                        if !shouldContinueLoading {
+                            self.forceStopLoadingState()
+                        }
+                        
+                        completion?(.unknown, response.result.error as NSError?)
+                    }else{
+                        completion?(.canceled, response.result.error as NSError?)
+                    }
                 }
-            }
         }
     }
     
@@ -427,12 +438,12 @@ open class NFImageView: UIView {
             
             if let image = response.result.value {
                 self.image = image
-                completion?(code: .success, error: nil)
+                completion?(.success, nil)
             }else{
-                if let errorCode = response.result.error?.code , errorCode != NFImageViewRequestCode.canceled.rawValue {
-                    completion?(code: .unknown, error: response.result.error)
+                if let errorCode = response.response?.statusCode, errorCode != NFImageViewRequestCode.canceled.rawValue {
+                    completion?(.unknown, response.result.error as NSError?)
                 }else{
-                    completion?(code: .canceled, error: response.result.error)
+                    completion?(.canceled, response.result.error as NSError?)
                 }
             }
         })
