@@ -21,6 +21,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        let color: UIColor = UIColor.black
+        
         imageView1.contentMode = .scaleAspectFill
         imageView2.contentMode = .scaleAspectFill
         imageView3.contentMode = .scaleAspectFill
@@ -60,11 +62,11 @@ class ViewController: UIViewController {
         imageView3.contentViewMode = .aspectFit
         imageView3.contentViewFill = .Center
         imageView3.highlighted = true
-        imageView3.tintColor = .red()
+        imageView3.tintColor = .red
         imageView3.highlightedImage = UIImage(named: "smartphone") // UIImage(named: "TestImage")
 
 //        imageView4.loadingEnabled = false
-        imageView4.loadingType = .spinner
+        imageView4.loadingType = .progress
         imageView4.contentViewMode = .aspectFit
         imageView4.contentViewFill = .Center
         imageView4.setThumbImageAndLargeImageFromURLString(thumbURLString: thumbnail2, largeURLString: largeImage2)
