@@ -20,9 +20,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        let color: UIColor = UIColor.black
-        
+                
         imageView1.contentMode = .scaleAspectFill
         imageView2.contentMode = .scaleAspectFill
         imageView3.contentMode = .scaleAspectFill
@@ -69,7 +67,7 @@ class ViewController: UIViewController {
         imageView4.loadingType = .progress
         imageView4.contentViewMode = .aspectFit
         imageView4.contentViewFill = .Center
-        imageView4.setThumbImageAndLargeImageFromURLString(thumbURLString: thumbnail2, largeURLString: largeImage2)
+        imageView4.setThumbImageAndLargeImage(fromURLString: thumbnail2, largeURLString: largeImage2)
         
     }
     
