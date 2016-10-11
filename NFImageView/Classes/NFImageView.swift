@@ -114,7 +114,7 @@ open class NFImageView: UIView {
         guard let image = highlighted ? highlightedImage : image else { return context.clear(rect) }
         
         // get content rect
-        let contentRect = contentModeRectForImage(image)
+        let contentRect = contentModeRect(forImage: image)
         
         // saves the graphics state
         context.saveGState()
@@ -172,13 +172,13 @@ open class NFImageView: UIView {
     
     // MARK: - Drawing Helpers
     
-    fileprivate func contentModeRectForImage(_ image: UIImage) -> CGRect {
+    fileprivate func contentModeRect(forImage image: UIImage) -> CGRect {
         let imageSize = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
         
         switch contentViewMode {
             
         case .originalSize: // image size is retained
-            return caculateContentViewFillRectForImageSize(imageSize)
+            return caculateContentViewImageFillRect(forSize: imageSize)
             
         case .aspectFit: // contents scaled to fit with fixed aspect. remainder is transparent
             
@@ -209,7 +209,7 @@ open class NFImageView: UIView {
             }
 
             let scaledImageSize = CGSize(width: imageSize.width * scaling, height: imageSize.height * scaling)
-            return caculateContentViewFillRectForImageSize(scaledImageSize)
+            return caculateContentViewImageFillRect(forSize: scaledImageSize)
             
         case .aspectFill: // contents scaled to fill with fixed aspect. some portion of content will be clipped.
             
@@ -240,7 +240,7 @@ open class NFImageView: UIView {
             }
             
             let scaledImageSize = CGSize(width: imageSize.width * scaling, height: imageSize.height * scaling)
-            return caculateContentViewFillRectForImageSize(scaledImageSize)
+            return caculateContentViewImageFillRect(forSize: scaledImageSize)
             
         default: break
             
@@ -250,7 +250,7 @@ open class NFImageView: UIView {
         return CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
     }
     
-    fileprivate func caculateContentViewFillRectForImageSize(_ imageSize: CGSize) -> CGRect {
+    fileprivate func caculateContentViewImageFillRect(forSize imageSize: CGSize) -> CGRect {
         
         // .Center fill
         var originX: CGFloat = (bounds.width - imageSize.width) / 2
@@ -351,12 +351,12 @@ open class NFImageView: UIView {
     
     // MARK: - Request Manager
     
-    internal func loadImageWithSpinner(_ imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
+    internal func loadWithSpinner(imageURL imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
         if let receipt = requestReceipt {
             receipt.request.cancel()
             if let canceledURLRequest = receipt.request.request?.url {
-                NFImageCacheAPI.sharedAPI.imageDownloadQueue.async(execute: {
-                    NFImageCacheAPI.sharedAPI.downloadImage(canceledURLRequest)
+                NFImageCacheAPI.shared.imageDownloadQueue.async(execute: {
+                    NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
                 })
             }
             requestReceipt = nil
@@ -364,7 +364,7 @@ open class NFImageView: UIView {
         
         forceStartLoadingState()
         
-        requestReceipt = NFImageCacheAPI.sharedAPI.downloadImage(imageURL, completion: { (response) in
+        requestReceipt = NFImageCacheAPI.shared.download(imageURL: imageURL, completion: { (response) in
             
             if let image = response.result.value {
                 self.forceStopLoadingState()
@@ -382,12 +382,12 @@ open class NFImageView: UIView {
         })
     }
     
-    internal func loadImageWithProgress(_ imageURL: URL, shouldContinueLoading: Bool = false, completion: NFImageViewRequestCompletion? = nil) {
+    internal func loadWithProgress(imageURL imageURL: URL, shouldContinueLoading: Bool = false, completion: NFImageViewRequestCompletion? = nil) {
         if let receipt = requestReceipt {
             receipt.request.cancel()
             if let canceledURLRequest = receipt.request.request?.url {
-                NFImageCacheAPI.sharedAPI.imageDownloadQueue.async(execute: {
-                    NFImageCacheAPI.sharedAPI.downloadImage(canceledURLRequest)
+                NFImageCacheAPI.shared.imageDownloadQueue.async(execute: {
+                    NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
                 })
             }
             requestReceipt = nil
@@ -395,7 +395,7 @@ open class NFImageView: UIView {
         
         forceStartLoadingState()
         
-        requestReceipt = NFImageCacheAPI.sharedAPI.downloadImageWithProgress(imageURL, progress: { (progress) in
+        requestReceipt = NFImageCacheAPI.shared.downloadWithProgress(imageURL: imageURL, progress: { (progress) in
             
             self.loadingProgressView.setProgress(Float(progress.fractionCompleted), animated: true)
             }) { (response) in
@@ -423,18 +423,18 @@ open class NFImageView: UIView {
     /**
      * Use when loading is disabled
      */
-    internal func loadImage(_ imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
+    internal func loadImage(fromURL imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
         if let receipt = requestReceipt {
             receipt.request.cancel()
             if let canceledURLRequest = receipt.request.request?.url {
-                NFImageCacheAPI.sharedAPI.imageDownloadQueue.async(execute: {
-                    NFImageCacheAPI.sharedAPI.downloadImage(canceledURLRequest)
+                NFImageCacheAPI.shared.imageDownloadQueue.async(execute: {
+                    NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
                 })
             }
             requestReceipt = nil
         }
         
-        requestReceipt = NFImageCacheAPI.sharedAPI.downloadImage(imageURL, completion: { (response) in
+        requestReceipt = NFImageCacheAPI.shared.download(imageURL: imageURL, completion: { (response) in
             
             if let image = response.result.value {
                 self.image = image

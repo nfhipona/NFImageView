@@ -66,26 +66,26 @@ extension NFImageView {
     /**
      * Set image from image URL string
      */
-    public func setImageFromURLString(_ URLString: String, completion: NFImageViewRequestCompletion? = nil) {
+    public func setImage(fromURLString URLString: String, completion: NFImageViewRequestCompletion? = nil) {
         if !URLString.isEmpty, let imageURL = URL(string: URLString) {
-            setImageFromURL(imageURL, completion: completion)
+            setImage(fromURL: imageURL, completion: completion)
         }
     }
     
     /**
      * Set image from image URL
      */
-    public func setImageFromURL(_ imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
+    public func setImage(fromURL imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
         
         if !loadingEnabled {
-            loadImage(imageURL, completion: completion)
+            loadImage(fromURL: imageURL, completion: completion)
         }else{
             switch loadingType {
             case .progress:
-                loadImageWithProgress(imageURL, completion: completion)
+                loadWithProgress(imageURL: imageURL, completion: completion)
                 
             default:
-                loadImageWithSpinner(imageURL, completion: completion)
+                loadWithSpinner(imageURL: imageURL, completion: completion)
             }
         }
     }
@@ -93,20 +93,20 @@ extension NFImageView {
     /**
      * Set thumbnail and large image from URL sting with blur effect transition
      */
-    public func setThumbImageAndLargeImageFromURLString(thumbURLString: String, largeURLString: String, completion: NFImageViewRequestCompletion? = nil) {
+    public func setThumbImageAndLargeImage(fromURLString thumbURLString: String, largeURLString: String, completion: NFImageViewRequestCompletion? = nil) {
         
         if !thumbURLString.isEmpty && !largeURLString.isEmpty, let thumbURL = URL(string: thumbURLString), let largeURL = URL(string: largeURLString) {
             
-            if let cachedImage = NFImageCacheAPI.sharedAPI.checkForImageContentInCacheStorage(largeURL) {
+            if let cachedImage = NFImageCacheAPI.shared.imageContentInCacheStorage(forURL: largeURL) {
                 image = cachedImage
                 
                 // update cache for url request
-                NFImageCacheAPI.sharedAPI.imageDownloadQueue.async(execute: {
-                    NFImageCacheAPI.sharedAPI.downloadImage(thumbURL)
-                    NFImageCacheAPI.sharedAPI.downloadImage(largeURL)
+                NFImageCacheAPI.shared.imageDownloadQueue.async(execute: {
+                    NFImageCacheAPI.shared.download(imageURL: thumbURL)
+                    NFImageCacheAPI.shared.download(imageURL: largeURL)
                 })
             }else{
-                setThumbImageAndLargeImageFromURL(thumbURL: thumbURL, largeURL: largeURL)
+                setThumbImageAndLargeImage(fromURL: thumbURL, largeURL: largeURL)
             }
         }
     }
@@ -114,12 +114,12 @@ extension NFImageView {
     /**
      * Set thumbnail and large image from URL with blur effect transition
      */
-    public func setThumbImageAndLargeImageFromURL(thumbURL: URL, largeURL: URL, completion: NFImageViewRequestCompletion? = nil) {
+    public func setThumbImageAndLargeImage(fromURL thumbURL: URL, largeURL: URL, completion: NFImageViewRequestCompletion? = nil) {
         
         if !loadingEnabled {
-            loadImage(thumbURL, completion: { (code, error) in
+            loadImage(fromURL: thumbURL, completion: { (code, error) in
                 if code == .success {
-                    self.loadImage(largeURL, completion: { (code, error) in
+                    self.loadImage(fromURL: largeURL, completion: { (code, error) in
                         completion?(code, error)
                     })
                 }else{
@@ -131,9 +131,9 @@ extension NFImageView {
             
             switch loadingType {
             case .progress:
-                loadImageWithProgress(thumbURL, shouldContinueLoading: true, completion: { (code, error) in
+                loadWithProgress(imageURL: thumbURL, shouldContinueLoading: true, completion: { (code, error) in
                     if code == .success {
-                        self.loadImageWithProgress(largeURL, completion: { (code, error) in
+                        self.loadWithProgress(imageURL: largeURL, completion: { (code, error) in
                             
                             self.blurEffect.isHidden = true
                             completion?(code, error)
@@ -145,9 +145,9 @@ extension NFImageView {
                 })
                 
             default:
-                loadImageWithSpinner(thumbURL, completion: { (code, error) in
+                loadWithSpinner(imageURL: thumbURL, completion: { (code, error) in
                     if code == .success {
-                        self.loadImageWithSpinner(largeURL, completion: { (code, error) in
+                        self.loadWithSpinner(imageURL: largeURL, completion: { (code, error) in
                             
                             self.blurEffect.isHidden = true
                             completion?(code, error)

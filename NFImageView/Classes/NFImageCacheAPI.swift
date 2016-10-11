@@ -12,7 +12,7 @@ import Alamofire
 
 open class NFImageCacheAPI: NSObject {
     
-    open static let sharedAPI = NFImageCacheAPI()
+    open static let shared = NFImageCacheAPI()
     
     open lazy var imageDownloadQueue: DispatchQueue = {
         DispatchQueue(label: "com.NFImageDownloadQueue.concurrent", attributes: DispatchQueue.Attributes.concurrent)
@@ -31,7 +31,7 @@ open class NFImageCacheAPI: NSObject {
     /**
      * Asynchronously download and cache image from a requested URL using AlamofireImage configuration
      */
-    open func downloadImage(_ requestURL: URL, completion: ImageDownloader.CompletionHandler? = nil) -> RequestReceipt? {
+    open func download(imageURL requestURL: URL, completion: ImageDownloader.CompletionHandler? = nil) -> RequestReceipt? {
         let request = URLRequest(url: requestURL)
         
         return imageDownloader.download(request, completion: completion)
@@ -40,7 +40,7 @@ open class NFImageCacheAPI: NSObject {
     /**
      * Asynchronously download and cache image from a requested URL using AlamofireImage configuration with progress handler
      */
-    open func downloadImageWithProgress(_ requestURL: URL, progress: ImageDownloader.ProgressHandler?, completion: ImageDownloader.CompletionHandler?) -> RequestReceipt? {
+    open func downloadWithProgress(imageURL requestURL: URL, progress: ImageDownloader.ProgressHandler?, completion: ImageDownloader.CompletionHandler?) -> RequestReceipt? {
         let request = URLRequest(url: requestURL)
         
         return imageDownloader.download(request, progress: progress, completion: completion)
@@ -49,7 +49,7 @@ open class NFImageCacheAPI: NSObject {
     /**
      * Check image cache for url request
      */
-    open func checkForImageContentInCacheStorage(_ requestURL: URL, identifier: String? = nil) -> UIImage? {
+    open func imageContentInCacheStorage(forURL requestURL: URL, identifier: String? = nil) -> UIImage? {
         
         let request = URLRequest(url: requestURL)
         return imageRequestCache.image(for: request, withIdentifier: identifier)
@@ -58,7 +58,7 @@ open class NFImageCacheAPI: NSObject {
     /**
      * Cache image for url request
      */
-    open func cacheImageForRequestURL(_ image: UIImage, requestURL: URL, identifier: String? = nil) {
+    open func cacheImage(_ image: UIImage, forURL requestURL: URL, identifier: String? = nil) {
         
         let request = URLRequest(url: requestURL)
         imageRequestCache.add(image, for: request, withIdentifier: identifier)
@@ -67,7 +67,7 @@ open class NFImageCacheAPI: NSObject {
     /**
      * Remove image from cache for url request
      */
-    open func removeCachedImageForRequestURL(_ requestURL: URL, identifier: String? = nil) {
+    open func removeCachedImage(forURL requestURL: URL, identifier: String? = nil) {
         
         let request = URLRequest(url: requestURL)
         imageRequestCache.removeImage(for: request, withIdentifier: identifier)
