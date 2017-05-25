@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NFImageView'
-  s.version          = '0.1.6'
+  s.version          = '0.1.7'
   s.summary          = "'NFImageView' is a subclass of a UIView that acts like a UIImageView. Uses CoreGraphics to draw image."
 
 # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/nferocious76/NFImageView.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/nferocious76'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'NFImageView/Classes/**/*'
   
