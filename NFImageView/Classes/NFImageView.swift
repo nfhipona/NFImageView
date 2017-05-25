@@ -351,12 +351,12 @@ open class NFImageView: UIView {
     
     // MARK: - Request Manager
     
-    internal func loadWithSpinner(imageURL imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
+    internal func loadWithSpinner(imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
         if let receipt = requestReceipt {
             receipt.request.cancel()
             if let canceledURLRequest = receipt.request.request?.url {
                 NFImageCacheAPI.shared.imageDownloadQueue.async(execute: {
-                    NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
+                    let _ = NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
                 })
             }
             requestReceipt = nil
@@ -382,12 +382,12 @@ open class NFImageView: UIView {
         })
     }
     
-    internal func loadWithProgress(imageURL imageURL: URL, shouldContinueLoading: Bool = false, completion: NFImageViewRequestCompletion? = nil) {
+    internal func loadWithProgress(imageURL: URL, shouldContinueLoading: Bool = false, completion: NFImageViewRequestCompletion? = nil) {
         if let receipt = requestReceipt {
             receipt.request.cancel()
             if let canceledURLRequest = receipt.request.request?.url {
                 NFImageCacheAPI.shared.imageDownloadQueue.async(execute: {
-                    NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
+                    let _ = NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
                 })
             }
             requestReceipt = nil
@@ -428,7 +428,7 @@ open class NFImageView: UIView {
             receipt.request.cancel()
             if let canceledURLRequest = receipt.request.request?.url {
                 NFImageCacheAPI.shared.imageDownloadQueue.async(execute: {
-                    NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
+                    let _ = NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
                 })
             }
             requestReceipt = nil

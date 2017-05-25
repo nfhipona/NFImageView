@@ -102,8 +102,8 @@ extension NFImageView {
                 
                 // update cache for url request
                 NFImageCacheAPI.shared.imageDownloadQueue.async(execute: {
-                    NFImageCacheAPI.shared.download(imageURL: thumbURL)
-                    NFImageCacheAPI.shared.download(imageURL: largeURL)
+                    let _ = NFImageCacheAPI.shared.download(imageURL: thumbURL)
+                    let _ = NFImageCacheAPI.shared.download(imageURL: largeURL)
                 })
             }else{
                 setThumbImageAndLargeImage(fromURL: thumbURL, largeURL: largeURL)
