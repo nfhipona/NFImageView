@@ -21,10 +21,10 @@
   "source_files": "NFImageView/Classes/**/*",
   "dependencies": {
     "Alamofire": [
-      "~> 4.0"
+      "~> 4.4"
     ],
     "AlamofireImage": [
-      "~> 3.0"
+      "~> 3.1"
     ]
   }
 }
