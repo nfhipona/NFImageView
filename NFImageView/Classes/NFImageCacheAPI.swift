@@ -12,7 +12,7 @@ import Alamofire
 
 open class NFImageCacheAPI: NSObject {
     
-    open static let shared = NFImageCacheAPI()
+    public static let shared = NFImageCacheAPI()
     
     open lazy var imageDownloadQueue: DispatchQueue = {
         DispatchQueue(label: "com.NFImageDownloadQueue.concurrent", attributes: DispatchQueue.Attributes.concurrent)

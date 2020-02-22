@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NFImageView'
-  s.version          = '0.1.7'
+  s.version          = '0.2.0'
   s.summary          = "'NFImageView' is a subclass of a UIView that acts like a UIImageView. Uses CoreGraphics to draw image."
 
 # This description is used to generate tags and improve search results.
@@ -42,7 +42,7 @@ Pod::Spec.new do |s|
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 
-s.dependency 'Alamofire', '~> 4.4'
-s.dependency 'AlamofireImage', '~> 3.1'
+s.dependency 'Alamofire'
+s.dependency 'AlamofireImage'
 
 end
