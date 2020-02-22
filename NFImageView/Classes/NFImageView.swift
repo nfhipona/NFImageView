@@ -85,7 +85,7 @@ open class NFImageView: UIView {
     
     public convenience init(frame: CGRect, image img: UIImage?, highlightedImage hImg: UIImage? = nil) {
         self.init(frame: frame)
-     
+        
         image = img
         highlightedImage = hImg
     }
@@ -98,7 +98,7 @@ open class NFImageView: UIView {
         
         setNeedsDisplay()
     }
-
+    
     open override func layoutSubviews() {
         super.layoutSubviews()
         setNeedsDisplay()
@@ -138,7 +138,7 @@ open class NFImageView: UIView {
             
             // mask image clipping path
             context.clip(to: contentRect, mask: templateCGImage)
-
+            
             // set blend mode
             context.setBlendMode(.color)
             
@@ -184,7 +184,7 @@ open class NFImageView: UIView {
             
             var scaling: CGFloat = 1.0
             let imageMaxSize = imageSize.width > imageSize.height ? imageSize.width : imageSize.height
-
+            
             // get max container bounds
             if bounds.width > bounds.height {
                 // get max scale of max image bounds to container max bounds
@@ -207,7 +207,7 @@ open class NFImageView: UIView {
                     scaling = maxScale
                 }
             }
-
+            
             let scaledImageSize = CGSize(width: imageSize.width * scaling, height: imageSize.height * scaling)
             return caculateContentViewImageFillRect(forSize: scaledImageSize)
             
@@ -282,7 +282,7 @@ open class NFImageView: UIView {
         
         return flipContentRect
     }
-
+    
     
     // MARK: - Loaders
     
@@ -398,25 +398,26 @@ open class NFImageView: UIView {
         requestReceipt = NFImageCacheAPI.shared.downloadWithProgress(imageURL: imageURL, progress: { (progress) in
             
             self.loadingProgressView.setProgress(Float(progress.fractionCompleted), animated: true)
-            }) { (response) in
-                if let image = response.result.value as UIImage? {
+            
+        }) { (response) in
+            if let image = response.result.value as UIImage? {
+                if !shouldContinueLoading {
+                    self.forceStopLoadingState()
+                }
+                
+                self.image = image
+                completion?(.success, nil)
+            }else{
+                if let errorCode = response.response?.statusCode, errorCode != NFImageViewRequestCode.canceled.rawValue {
                     if !shouldContinueLoading {
                         self.forceStopLoadingState()
                     }
                     
-                    self.image = image
-                    completion?(.success, nil)
+                    completion?(.unknown, response.result.error as NSError?)
                 }else{
-                    if let errorCode = response.response?.statusCode, errorCode != NFImageViewRequestCode.canceled.rawValue {
-                        if !shouldContinueLoading {
-                            self.forceStopLoadingState()
-                        }
-                        
-                        completion?(.unknown, response.result.error as NSError?)
-                    }else{
-                        completion?(.canceled, response.result.error as NSError?)
-                    }
+                    completion?(.canceled, response.result.error as NSError?)
                 }
+            }
         }
     }
     
