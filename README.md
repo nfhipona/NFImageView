@@ -1,12 +1,5 @@
 # NFImageView
 
-[![CI Status](http://img.shields.io/travis/Neil Francis Ramirez Hipona/NFImageView.svg?style=flat)](https://travis-ci.org/Neil Francis Ramirez Hipona/NFImageView)
-[![Version](https://img.shields.io/cocoapods/v/NFImageView.svg?style=flat)](http://cocoapods.org/pods/NFImageView)
-[![License](https://img.shields.io/cocoapods/l/NFImageView.svg?style=flat)](http://cocoapods.org/pods/NFImageView)
-[![Platform](https://img.shields.io/cocoapods/p/NFImageView.svg?style=flat)](http://cocoapods.org/pods/NFImageView)
-
-
-### NFImageView
 - [x] Realtime loading progress.
 - [x] Loading option with progress or spinner.
 - [x] Loading option with blur using thumbnail and a larger image.

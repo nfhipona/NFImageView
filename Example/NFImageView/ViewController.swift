@@ -21,6 +21,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
                 
+        imageView1.image = nil
+        imageView2.image = nil
+        imageView3.image = nil
+        imageView4.image = nil
+        
         imageView1.contentMode = .scaleAspectFill
         imageView2.contentMode = .scaleAspectFill
         imageView3.contentMode = .scaleAspectFill
@@ -57,9 +62,14 @@ class ViewController: UIViewController {
         imageView3.loadingType = .progress
         imageView3.contentViewMode = .aspectFit
         imageView3.contentViewFill = .Center
-        imageView3.highlighted = true
-        imageView3.tintColor = .red
-        imageView3.highlightedImage = UIImage(named: "smartphone") // UIImage(named: "TestImage")
+        imageView3.image = UIImage(named: "smartphone")
+        
+        // highlighted after 3s delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.imageView3.highlighted = true
+            self.imageView3.tintColor = .red
+            self.imageView3.highlightedImage = UIImage(named: "smartphone") // UIImage(named: "TestImage")
+        }
 
 //        imageView4.loadingEnabled = false
         imageView4.loadingType = .progress
