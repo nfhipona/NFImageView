@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		13F1727B92E770CE816207BE /* NFImageView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NFImageView.podspec; path = ../NFImageView.podspec; sourceTree = "<group>"; };
+		13F1727B92E770CE816207BE /* NFImageView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = NFImageView.podspec; path = ../NFImageView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		1C851D33310261C0917EA2B2 /* Pods-NFImageView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NFImageView_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-NFImageView_Example/Pods-NFImageView_Example.release.xcconfig"; sourceTree = "<group>"; };
 		2616AB7F9645A3B493E811D1 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		2B325B9017E4DEFE606D623F /* Pods-NFImageView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NFImageView_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NFImageView_Tests/Pods-NFImageView_Tests.release.xcconfig"; sourceTree = "<group>"; };
