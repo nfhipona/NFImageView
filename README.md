@@ -1,5 +1,7 @@
 # NFImageView
 
+[Demo Video](https://youtu.be/TgG3O_r9CYw)
+
 - [x] Realtime loading progress.
 - [x] Loading option with progress or spinner.
 - [x] Loading option with blur using thumbnail and a larger image.
