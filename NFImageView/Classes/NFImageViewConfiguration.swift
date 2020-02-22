@@ -24,8 +24,8 @@ extension NFImageView {
     /**
      * Set loading spinner's spinner style
      */
-    public func setLoadingSpinnerViewStyle(activityIndicatorViewStyle style: UIActivityIndicatorViewStyle) {
-        loadingIndicator.activityIndicatorViewStyle = style
+    public func setLoadingSpinnerViewStyle(activityIndicatorViewStyle style: UIActivityIndicatorView.Style) {
+        loadingIndicator.style = style
     }
     
     /**
@@ -41,7 +41,7 @@ extension NFImageView {
     /**
      * Set loading progress view style
      */
-    public func setLoadingProgressViewStyle(progressViewStyle style: UIProgressViewStyle) {
+    public func setLoadingProgressViewStyle(progressViewStyle style: UIProgressView.Style) {
         loadingProgressView.progressViewStyle = style
     }
     

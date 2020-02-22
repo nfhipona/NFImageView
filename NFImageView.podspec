@@ -42,7 +42,7 @@ Pod::Spec.new do |s|
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 
-s.dependency 'Alamofire', '~> 4.4'
-s.dependency 'AlamofireImage', '~> 3.1'
+s.dependency 'Alamofire'
+s.dependency 'AlamofireImage'
 
 end

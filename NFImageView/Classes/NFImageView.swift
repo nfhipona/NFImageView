@@ -291,10 +291,10 @@ open class NFImageView: UIView {
         let loadingIndicatorFrame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
         let loadingIndicator = UIActivityIndicatorView(frame: loadingIndicatorFrame)
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = .gray
+        loadingIndicator.style = .gray
         
         addSubview(loadingIndicator)
-        bringSubview(toFront: loadingIndicator)
+        bringSubviewToFront(loadingIndicator)
         
         loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
         let top = NSLayoutConstraint(item: loadingIndicator, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0.0)
@@ -316,7 +316,7 @@ open class NFImageView: UIView {
         progressView.alpha = 0.0
         
         addSubview(progressView)
-        bringSubview(toFront: progressView)
+        bringSubviewToFront(progressView)
         
         progressView.translatesAutoresizingMaskIntoConstraints = false
         let trailing = NSLayoutConstraint(item: progressView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0.0)
@@ -336,7 +336,7 @@ open class NFImageView: UIView {
         blurView.isHidden = true
         
         addSubview(blurView)
-        sendSubview(toBack: blurView)
+        sendSubviewToBack(blurView)
         
         blurView.translatesAutoresizingMaskIntoConstraints = false
         let top = NSLayoutConstraint(item: blurView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0.0)
