@@ -181,6 +181,19 @@ class ViewController: UIViewController {
         imageView4.loadingType = .progress
         imageView4.setThumbImageAndLargeImage(fromURLString: thumbnail, largeURLString: largeImage)
         
+        /*
+        imageView1.setImage(fromURL: <#T##URL#>)
+        imageView1.setImage(fromURL: <#T##URL#>, completion: <#T##NFImageViewRequestCompletion?##NFImageViewRequestCompletion?##(NFImageViewRequestCode, NSError?) -> Void#>)
+        
+        imageView1.setImage(fromURLString: <#T##String#>)
+        imageView1.setImage(fromURLString: <#T##String#>, completion: <#T##NFImageViewRequestCompletion?##NFImageViewRequestCompletion?##(NFImageViewRequestCode, NSError?) -> Void#>)
+        
+        imageView1.setThumbImageAndLargeImage(fromURL: <#T##URL#>, largeURL: <#T##URL#>)
+        imageView1.setThumbImageAndLargeImage(fromURL: <#T##URL#>, largeURL: <#T##URL#>, completion: <#T##NFImageViewRequestCompletion?##NFImageViewRequestCompletion?##(NFImageViewRequestCode, NSError?) -> Void#>)
+        
+        imageView1.setThumbImageAndLargeImage(fromURLString: <#T##String#>, largeURLString: <#T##String#>)
+        imageView1.setThumbImageAndLargeImage(fromURLString: <#T##String#>, largeURLString: <#T##String#>, completion: <#T##NFImageViewRequestCompletion?##NFImageViewRequestCompletion?##(NFImageViewRequestCode, NSError?) -> Void#>)
+        */
     }
     
     func setupImageView(imageView: NFImageView) {
