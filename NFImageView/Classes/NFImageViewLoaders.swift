@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Alamofire
+import AlamofireImage
 
 // MARK: - Loaders
 
@@ -26,17 +28,20 @@ extension NFImageView {
         
         requestReceipt = NFImageCacheAPI.shared.download(imageURL: imageURL, completion: { (response) in
             
-            if let image = response.result.value {
+            switch response.result {
+                
+            case .success(let value):
                 self.forceStopLoadingState()
                 
-                self.image = image
+                self.image = value
                 completion?(.success, nil)
-            }else{
+                
+            case .failure(let error):
                 if let errorCode = response.response?.statusCode, errorCode != NFImageViewRequestCode.canceled.rawValue {
                     self.forceStopLoadingState()
-                    completion?(.unknown, response.result.error as NSError?)
+                    completion?(.unknown, error as NSError?)
                 }else{
-                    completion?(.canceled, response.result.error as NSError?)
+                    completion?(.canceled, error as NSError?)
                 }
             }
         })
@@ -60,22 +65,26 @@ extension NFImageView {
             self.loadingProgressView.setProgress(Float(progress.fractionCompleted), animated: true)
             
         }) { (response) in
-            if let image = response.result.value as UIImage? {
+            
+            switch response.result {
+                
+            case .success(let value):
                 if !shouldContinueLoading {
                     self.forceStopLoadingState()
                 }
                 
-                self.image = image
+                self.image = value
                 completion?(.success, nil)
-            }else{
+                
+            case .failure(let error):
                 if let errorCode = response.response?.statusCode, errorCode != NFImageViewRequestCode.canceled.rawValue {
                     if !shouldContinueLoading {
                         self.forceStopLoadingState()
                     }
                     
-                    completion?(.unknown, response.result.error as NSError?)
+                    completion?(.unknown, error as NSError?)
                 }else{
-                    completion?(.canceled, response.result.error as NSError?)
+                    completion?(.canceled, error as NSError?)
                 }
             }
         }
@@ -97,14 +106,17 @@ extension NFImageView {
         
         requestReceipt = NFImageCacheAPI.shared.download(imageURL: imageURL, completion: { (response) in
             
-            if let image = response.result.value {
-                self.image = image
+            switch response.result {
+                
+            case .success(let value):
+                self.image = value
                 completion?(.success, nil)
-            }else{
+                
+            case .failure(let error):
                 if let errorCode = response.response?.statusCode, errorCode != NFImageViewRequestCode.canceled.rawValue {
-                    completion?(.unknown, response.result.error as NSError?)
+                    completion?(.unknown, error as NSError?)
                 }else{
-                    completion?(.canceled, response.result.error as NSError?)
+                    completion?(.canceled, error as NSError?)
                 }
             }
         })
