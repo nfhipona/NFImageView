@@ -17,6 +17,127 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageView3: NFImageView!
     @IBOutlet weak var imageView4: NFImageView!
     
+    @IBOutlet weak var contentFIllButton: UIButton!
+    @IBOutlet weak var contentModeButton: UIButton!
+    
+    @IBAction func contentFIllButton(_ sender: UIButton) {
+        
+        let alertController = UIAlertController(title: "Content View Fill", message: "Change content view fill on the image views", preferredStyle: .actionSheet)
+        
+        let centerFill = UIAlertAction(title: "Center Fill", style: .default) { _ in
+            self.changeFill(imageView: self.imageView1, fill: .Center)
+            self.changeFill(imageView: self.imageView2, fill: .Center)
+            self.changeFill(imageView: self.imageView3, fill: .Center)
+            self.changeFill(imageView: self.imageView4, fill: .Center)
+        }
+        
+        let leftFill = UIAlertAction(title: "Left Fill", style: .default) { _ in
+            self.changeFill(imageView: self.imageView1, fill: .Left)
+            self.changeFill(imageView: self.imageView2, fill: .Left)
+            self.changeFill(imageView: self.imageView3, fill: .Left)
+            self.changeFill(imageView: self.imageView4, fill: .Left)
+        }
+        
+        let rightFill = UIAlertAction(title: "Right Fill", style: .default) { _ in
+            self.changeFill(imageView: self.imageView1, fill: .Right)
+            self.changeFill(imageView: self.imageView2, fill: .Right)
+            self.changeFill(imageView: self.imageView3, fill: .Right)
+            self.changeFill(imageView: self.imageView4, fill: .Right)
+        }
+        
+        let bottomFill = UIAlertAction(title: "Bottom Fill", style: .default) { _ in
+            self.changeFill(imageView: self.imageView1, fill: .Bottom)
+            self.changeFill(imageView: self.imageView2, fill: .Bottom)
+            self.changeFill(imageView: self.imageView3, fill: .Bottom)
+            self.changeFill(imageView: self.imageView4, fill: .Bottom)
+        }
+        
+        let topLeft = UIAlertAction(title: "TopLeft Fill", style: .default) { _ in
+            self.changeFill(imageView: self.imageView1, fill: .TopLeft)
+            self.changeFill(imageView: self.imageView2, fill: .TopLeft)
+            self.changeFill(imageView: self.imageView3, fill: .TopLeft)
+            self.changeFill(imageView: self.imageView4, fill: .TopLeft)
+        }
+        
+        let topRight = UIAlertAction(title: "TopRight Fill", style: .default) { _ in
+            self.changeFill(imageView: self.imageView1, fill: .TopRight)
+            self.changeFill(imageView: self.imageView2, fill: .TopRight)
+            self.changeFill(imageView: self.imageView3, fill: .TopRight)
+            self.changeFill(imageView: self.imageView4, fill: .TopRight)
+        }
+        
+        let bottomLeft = UIAlertAction(title: "BottomLeft Fill", style: .default) { _ in
+            self.changeFill(imageView: self.imageView1, fill: .BottomLeft)
+            self.changeFill(imageView: self.imageView2, fill: .BottomLeft)
+            self.changeFill(imageView: self.imageView3, fill: .BottomLeft)
+            self.changeFill(imageView: self.imageView4, fill: .BottomLeft)
+        }
+        
+        let bottomRight = UIAlertAction(title: "BottomRight Fill", style: .default) { _ in
+            self.changeFill(imageView: self.imageView1, fill: .BottomRight)
+            self.changeFill(imageView: self.imageView2, fill: .BottomRight)
+            self.changeFill(imageView: self.imageView3, fill: .BottomRight)
+            self.changeFill(imageView: self.imageView4, fill: .BottomRight)
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(centerFill)
+        alertController.addAction(leftFill)
+        alertController.addAction(rightFill)
+        alertController.addAction(bottomFill)
+        alertController.addAction(topLeft)
+        alertController.addAction(topRight)
+        alertController.addAction(bottomLeft)
+        alertController.addAction(bottomRight)
+        alertController.addAction(cancel)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func contentModeButton(_ sender: UIButton) {
+        
+        let alertController = UIAlertController(title: "Content View Mode", message: "Change content view mode on the image views", preferredStyle: .actionSheet)
+
+        let fill = UIAlertAction(title: "Fill Mode", style: .default) { _ in
+            self.changeMode(imageView: self.imageView1, mode: .fill)
+            self.changeMode(imageView: self.imageView2, mode: .fill)
+            self.changeMode(imageView: self.imageView3, mode: .fill)
+            self.changeMode(imageView: self.imageView4, mode: .fill)
+        }
+        
+        let aspectFit = UIAlertAction(title: "Aspect Fit Mode", style: .default) { _ in
+            self.changeMode(imageView: self.imageView1, mode: .aspectFit)
+            self.changeMode(imageView: self.imageView2, mode: .aspectFit)
+            self.changeMode(imageView: self.imageView3, mode: .aspectFit)
+            self.changeMode(imageView: self.imageView4, mode: .aspectFit)
+        }
+        
+        let aspectFill = UIAlertAction(title: "Aspect Fill Mode", style: .default) { _ in
+            self.changeMode(imageView: self.imageView1, mode: .aspectFill)
+            self.changeMode(imageView: self.imageView2, mode: .aspectFill)
+            self.changeMode(imageView: self.imageView3, mode: .aspectFill)
+            self.changeMode(imageView: self.imageView4, mode: .aspectFill)
+        }
+        
+        let originalSize = UIAlertAction(title: "Original Image Size", style: .default) { _ in
+            self.changeMode(imageView: self.imageView1, mode: .originalSize)
+            self.changeMode(imageView: self.imageView2, mode: .originalSize)
+            self.changeMode(imageView: self.imageView3, mode: .originalSize)
+            self.changeMode(imageView: self.imageView4, mode: .originalSize)
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(fill)
+        alertController.addAction(aspectFit)
+        alertController.addAction(aspectFill)
+        alertController.addAction(originalSize)
+        alertController.addAction(cancel)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -39,22 +160,15 @@ class ViewController: UIViewController {
         let largeImageSpinner = "https://images2.alphacoders.com/100/1002628.png"
         let largeImageProgress = "https://images.alphacoders.com/747/747289.jpg"
         
-//        imageView1.loadingEnabled = false
         imageView1.loadingType = .spinner
-        imageView1.contentViewMode = .aspectFill
         imageView1.setImage(fromURLString: largeImageSpinner)
         
-//        imageView2.loadingEnabled = false
         imageView2.loadingType = .progress
-        imageView2.contentViewMode = .aspectFit
-        imageView2.contentViewFill = .Center
         imageView2.setImage(fromURLString: largeImageProgress)
         
         // using highlighted image and setting 'contentViewMode' and 'contentViewFill'
         
-        imageView3.loadingType = .progress
-        imageView3.contentViewMode = .aspectFit
-        imageView3.contentViewFill = .Center
+        imageView3.loadingEnabled = false
         imageView3.image = UIImage(named: "smartphone")
         
         // highlighted after 3s delay
@@ -64,10 +178,7 @@ class ViewController: UIViewController {
             self.imageView3.highlightedImage = UIImage(named: "smartphone") // UIImage(named: "TestImage")
         }
 
-//        imageView4.loadingEnabled = false
         imageView4.loadingType = .progress
-        imageView4.contentViewMode = .aspectFill
-        imageView4.contentViewFill = .Center
         imageView4.setThumbImageAndLargeImage(fromURLString: thumbnail, largeURLString: largeImage)
         
     }
@@ -80,6 +191,19 @@ class ViewController: UIViewController {
         
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.layer.borderWidth = 1.0
+        
+        imageView.contentViewMode = .aspectFit
+        imageView.contentViewFill = .Center
+    }
+    
+    func changeMode(imageView: NFImageView, mode: ViewContentMode) {
+        
+        imageView.contentViewMode = mode
+    }
+    
+    func changeFill(imageView: NFImageView, fill: ViewContentFill) {
+        
+        imageView.contentViewFill = fill
     }
     
 }

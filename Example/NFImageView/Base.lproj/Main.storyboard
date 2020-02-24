@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Content View-->
         <scene sceneID="MjA-19-AYd">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w2A-6a-Cd9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -59,8 +59,31 @@
                             <constraint firstItem="zrh-NB-MGR" firstAttribute="leading" secondItem="nSv-jP-FV4" secondAttribute="leading" id="wYa-kC-8GC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="NOk-kP-pzA"/>
+                    <navigationItem key="navigationItem" title="Content View" id="NOk-kP-pzA">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="dQz-FY-thH">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8Eg-3Q-FEN">
+                                <rect key="frame" x="-23" y="-15" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Content Fill"/>
+                                <connections>
+                                    <action selector="contentFIllButton:" destination="DXH-xk-Ye1" eventType="touchUpInside" id="V80-pc-msx"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="19g-01-CgF">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4kP-G9-Rfj">
+                                <rect key="frame" x="-23" y="-15" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Content Mode"/>
+                                <connections>
+                                    <action selector="contentModeButton:" destination="DXH-xk-Ye1" eventType="touchUpInside" id="Bhb-6h-W9A"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="contentFIllButton" destination="8Eg-3Q-FEN" id="All-ts-kmi"/>
+                        <outlet property="contentModeButton" destination="4kP-G9-Rfj" id="M5e-yq-82I"/>
                         <outlet property="imageView1" destination="zrh-NB-MGR" id="3mq-GM-2VF"/>
                         <outlet property="imageView2" destination="oGQ-Su-5is" id="BZK-J9-EXI"/>
                         <outlet property="imageView3" destination="n5J-6u-buI" id="Ncz-lC-3hf"/>
