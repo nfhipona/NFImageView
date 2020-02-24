@@ -39,6 +39,24 @@ github "nferocious76/NFImageView"
 1. Download and drop ```/Pod/Classes``` folder in your project.  
 2. Congratulations!
 
+## Image View Functions
+```Available functions```
+
+```Swift
+
+imageView.setImage(fromURL: <#T##URL#>)
+imageView.setImage(fromURL: <#T##URL#>, completion: <#T##NFImageViewRequestCompletion?##NFImageViewRequestCompletion?##(NFImageViewRequestCode, NSError?) -> Void#>)
+
+imageView.setImage(fromURLString: <#T##String#>)
+imageView.setImage(fromURLString: <#T##String#>, completion: <#T##NFImageViewRequestCompletion?##NFImageViewRequestCompletion?##(NFImageViewRequestCode, NSError?) -> Void#>)
+
+imageView.setThumbImageAndLargeImage(fromURL: <#T##URL#>, largeURL: <#T##URL#>)
+imageView.setThumbImageAndLargeImage(fromURL: <#T##URL#>, largeURL: <#T##URL#>, completion: <#T##NFImageViewRequestCompletion?##NFImageViewRequestCompletion?##(NFImageViewRequestCode, NSError?) -> Void#>)
+
+imageView.setThumbImageAndLargeImage(fromURLString: <#T##String#>, largeURLString: <#T##String#>)
+imageView.setThumbImageAndLargeImage(fromURLString: <#T##String#>, largeURLString: <#T##String#>, completion: <#T##NFImageViewRequestCompletion?##NFImageViewRequestCompletion?##(NFImageViewRequestCode, NSError?) -> Void#>)
+
+```
 
 ## Usage example
 
