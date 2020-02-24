@@ -29,7 +29,7 @@ public class NFImageCacheAPI: NSObject {
     // MARK: - Public Functions
     
     /**
-    * Set image cache capacity
+    * Set image cache capacity. The `memoryCapacity` must be greater than or equal to `preferredMemoryUsageAfterPurge`
     */
     public func setCapacity(memoryCapacity: UInt64 = 150 * 1024 * 1024, preferredMemoryUsageAfterPurge: UInt64 = 60 * 1024 * 1024) {
         
