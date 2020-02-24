@@ -1,81 +1,92 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0d3-IZ-k6X">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="c2m-6G-HF2">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="xp3-X8-0uI">
+        <scene sceneID="MjA-19-AYd">
             <objects>
-                <viewController id="0d3-IZ-k6X" customClass="ViewController" customModule="NFImageView_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w2A-6a-Cd9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="DXH-xk-Ye1" customClass="ViewController" customModule="NFImageView_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1KM-BA-w7O"/>
-                        <viewControllerLayoutGuide type="bottom" id="OFe-DZ-UAY"/>
+                        <viewControllerLayoutGuide type="top" id="B3i-j6-pjF"/>
+                        <viewControllerLayoutGuide type="bottom" id="0t7-Hl-Wd8"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="wE1-Fn-QSP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view key="view" contentMode="scaleToFill" id="nSv-jP-FV4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6wI-3o-M6O" customClass="NFImageView" customModule="NFImageView">
-                                <rect key="frame" x="0.0" y="380" width="600" height="220"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vfp-oz-v5r" customClass="NFImageView" customModule="NFImageView">
-                                <rect key="frame" x="0.0" y="160" width="600" height="220"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2U-yf-jFB" customClass="NFImageView" customModule="NFImageView">
-                                <rect key="frame" x="300" y="0.0" width="300" height="160"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="TestImage"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LV3-qx-wzu" customClass="NFImageView" customModule="NFImageView">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zrh-NB-MGR" customClass="NFImageView" customModule="NFImageView">
+                                <rect key="frame" x="0.0" y="88" width="207" height="150"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="Gns-I6-2qO"/>
+                                    <constraint firstAttribute="height" constant="150" id="i0w-j6-hFO"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="smartphone"/>
-                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGQ-Su-5is" customClass="NFImageView" customModule="NFImageView">
+                                <rect key="frame" x="207" y="88" width="207" height="150"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n5J-6u-buI" customClass="NFImageView" customModule="NFImageView">
+                                <rect key="frame" x="0.0" y="238" width="414" height="231"/>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vzm-br-n9U" customClass="NFImageView" customModule="NFImageView">
+                                <rect key="frame" x="0.0" y="469" width="414" height="385"/>
+                                <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="F2U-yf-jFB" firstAttribute="bottom" secondItem="LV3-qx-wzu" secondAttribute="bottom" id="AQ4-Yb-qcV"/>
-                            <constraint firstItem="F2U-yf-jFB" firstAttribute="top" secondItem="LV3-qx-wzu" secondAttribute="top" id="Cny-j2-ZOo"/>
-                            <constraint firstItem="6wI-3o-M6O" firstAttribute="leading" secondItem="wE1-Fn-QSP" secondAttribute="leading" id="JET-lm-m8E"/>
-                            <constraint firstItem="Vfp-oz-v5r" firstAttribute="top" secondItem="F2U-yf-jFB" secondAttribute="bottom" id="Y2V-jV-JYr"/>
-                            <constraint firstAttribute="trailing" secondItem="Vfp-oz-v5r" secondAttribute="trailing" id="ZGq-M5-ThF"/>
-                            <constraint firstItem="6wI-3o-M6O" firstAttribute="height" secondItem="Vfp-oz-v5r" secondAttribute="height" id="cOn-Ws-JPV"/>
-                            <constraint firstItem="6wI-3o-M6O" firstAttribute="top" secondItem="Vfp-oz-v5r" secondAttribute="bottom" id="csj-lt-bl1"/>
-                            <constraint firstItem="OFe-DZ-UAY" firstAttribute="top" secondItem="6wI-3o-M6O" secondAttribute="bottom" id="gAv-Eu-h1q"/>
-                            <constraint firstItem="Vfp-oz-v5r" firstAttribute="leading" secondItem="wE1-Fn-QSP" secondAttribute="leading" id="gwZ-n3-cfN"/>
-                            <constraint firstItem="F2U-yf-jFB" firstAttribute="leading" secondItem="LV3-qx-wzu" secondAttribute="trailing" id="h1W-v2-0BZ"/>
-                            <constraint firstAttribute="trailing" secondItem="6wI-3o-M6O" secondAttribute="trailing" id="i2Z-Ev-Inu"/>
-                            <constraint firstItem="LV3-qx-wzu" firstAttribute="top" secondItem="wE1-Fn-QSP" secondAttribute="top" id="lpM-3p-vKV"/>
-                            <constraint firstAttribute="trailing" secondItem="F2U-yf-jFB" secondAttribute="trailing" id="mSP-YE-lrs"/>
-                            <constraint firstItem="LV3-qx-wzu" firstAttribute="leading" secondItem="wE1-Fn-QSP" secondAttribute="leading" id="xzQ-a7-LMB"/>
-                            <constraint firstItem="F2U-yf-jFB" firstAttribute="width" secondItem="LV3-qx-wzu" secondAttribute="width" id="zEQ-bl-YGh"/>
+                            <constraint firstItem="vzm-br-n9U" firstAttribute="leading" secondItem="nSv-jP-FV4" secondAttribute="leading" id="2Tv-To-kRQ"/>
+                            <constraint firstAttribute="trailing" secondItem="vzm-br-n9U" secondAttribute="trailing" id="8Zk-x2-eXs"/>
+                            <constraint firstItem="n5J-6u-buI" firstAttribute="leading" secondItem="nSv-jP-FV4" secondAttribute="leading" id="AHr-x9-eOH"/>
+                            <constraint firstItem="0t7-Hl-Wd8" firstAttribute="top" secondItem="vzm-br-n9U" secondAttribute="bottom" constant="8" symbolic="YES" id="Asu-Bo-bhR"/>
+                            <constraint firstAttribute="trailing" secondItem="n5J-6u-buI" secondAttribute="trailing" id="Rf5-1P-DhQ"/>
+                            <constraint firstItem="zrh-NB-MGR" firstAttribute="top" secondItem="B3i-j6-pjF" secondAttribute="bottom" id="UAs-yq-zMI"/>
+                            <constraint firstItem="vzm-br-n9U" firstAttribute="top" secondItem="n5J-6u-buI" secondAttribute="bottom" id="Uke-jb-dpr"/>
+                            <constraint firstItem="zrh-NB-MGR" firstAttribute="width" secondItem="oGQ-Su-5is" secondAttribute="width" id="VUP-th-b2R"/>
+                            <constraint firstItem="oGQ-Su-5is" firstAttribute="top" secondItem="zrh-NB-MGR" secondAttribute="top" id="VX3-sf-TSp"/>
+                            <constraint firstItem="n5J-6u-buI" firstAttribute="height" secondItem="vzm-br-n9U" secondAttribute="height" multiplier="0.6" id="YxB-jj-nGL"/>
+                            <constraint firstItem="oGQ-Su-5is" firstAttribute="leading" secondItem="zrh-NB-MGR" secondAttribute="trailing" id="kp7-Qm-s1L"/>
+                            <constraint firstAttribute="trailing" secondItem="oGQ-Su-5is" secondAttribute="trailing" id="n4M-0f-bPP"/>
+                            <constraint firstItem="n5J-6u-buI" firstAttribute="top" secondItem="zrh-NB-MGR" secondAttribute="bottom" id="pyH-ls-jM3"/>
+                            <constraint firstItem="oGQ-Su-5is" firstAttribute="bottom" secondItem="zrh-NB-MGR" secondAttribute="bottom" id="rG7-ER-6OU"/>
+                            <constraint firstItem="zrh-NB-MGR" firstAttribute="leading" secondItem="nSv-jP-FV4" secondAttribute="leading" id="wYa-kC-8GC"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="NOk-kP-pzA"/>
                     <connections>
-                        <outlet property="imageView1" destination="LV3-qx-wzu" id="4VA-3V-CaM"/>
-                        <outlet property="imageView2" destination="F2U-yf-jFB" id="kUF-9L-dgN"/>
-                        <outlet property="imageView3" destination="Vfp-oz-v5r" id="eYy-al-nUH"/>
-                        <outlet property="imageView4" destination="6wI-3o-M6O" id="Fyn-dP-qFB"/>
+                        <outlet property="imageView1" destination="zrh-NB-MGR" id="3mq-GM-2VF"/>
+                        <outlet property="imageView2" destination="oGQ-Su-5is" id="BZK-J9-EXI"/>
+                        <outlet property="imageView3" destination="n5J-6u-buI" id="Ncz-lC-3hf"/>
+                        <outlet property="imageView4" destination="vzm-br-n9U" id="pgN-XB-s5Z"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sdN-OU-KDP" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="245" y="312"/>
+            <point key="canvasLocation" x="-1257" y="388"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ulu-ax-LAE">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ce2-5g-pSb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="c2m-6G-HF2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pA1-1w-YWu">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DXH-xk-Ye1" kind="relationship" relationship="rootViewController" id="UIN-IV-iy5"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-2167" y="388"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="TestImage" width="493" height="638"/>
-        <image name="smartphone" width="256" height="256"/>
-    </resources>
 </document>

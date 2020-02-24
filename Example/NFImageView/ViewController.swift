@@ -24,20 +24,10 @@ class ViewController: UIViewController {
         // set capacity
         NFImageCacheAPI.shared.setCapacity(memoryCapacity: 200 * 1024 * 1024, preferredMemoryUsageAfterPurge: 80 * 1024 * 1024)
                 
-        imageView1.image = nil
-        imageView2.image = nil
-        imageView3.image = nil
-        imageView4.image = nil
-        
-        imageView1.contentMode = .scaleAspectFill
-        imageView2.contentMode = .scaleAspectFill
-        imageView3.contentMode = .scaleAspectFill
-        imageView4.contentMode = .scaleAspectFill
-        
-        imageView1.clipsToBounds = true
-        imageView2.clipsToBounds = true
-        imageView3.clipsToBounds = true
-        imageView4.clipsToBounds = true
+        setupImageView(imageView: imageView1)
+        setupImageView(imageView: imageView2)
+        setupImageView(imageView: imageView3)
+        setupImageView(imageView: imageView4)
         
         // NOTE: Test with network conditioner to fully see the effect.
         // Delete app after first load if you want to retest or image from cache will be used.
@@ -51,13 +41,13 @@ class ViewController: UIViewController {
         
 //        imageView1.loadingEnabled = false
         imageView1.loadingType = .spinner
-        imageView1.contentViewMode = .aspectFit
+        imageView1.contentViewMode = .aspectFill
         imageView1.setImage(fromURLString: largeImageSpinner)
         
 //        imageView2.loadingEnabled = false
         imageView2.loadingType = .progress
         imageView2.contentViewMode = .aspectFit
-        imageView2.contentViewFill = .TopRight
+        imageView2.contentViewFill = .Center
         imageView2.setImage(fromURLString: largeImageProgress)
         
         // using highlighted image and setting 'contentViewMode' and 'contentViewFill'
@@ -76,15 +66,20 @@ class ViewController: UIViewController {
 
 //        imageView4.loadingEnabled = false
         imageView4.loadingType = .progress
-        imageView4.contentViewMode = .aspectFit
+        imageView4.contentViewMode = .aspectFill
         imageView4.contentViewFill = .Center
         imageView4.setThumbImageAndLargeImage(fromURLString: thumbnail, largeURLString: largeImage)
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func setupImageView(imageView: NFImageView) {
+        
+        imageView.image = nil
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        
+        imageView.layer.borderColor = UIColor.gray.cgColor
+        imageView.layer.borderWidth = 1.0
     }
     
 }
