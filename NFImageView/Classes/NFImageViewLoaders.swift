@@ -15,7 +15,7 @@ extension NFImageView {
         if let receipt = requestReceipt {
             receipt.request.cancel()
             if let canceledURLRequest = receipt.request.request?.url {
-                NFImageCacheAPI.shared.imageDownloadQueue.async(execute: {
+                NFImageCacheAPI.shared.downloadQueue.async(execute: {
                     let _ = NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
                 })
             }
@@ -46,7 +46,7 @@ extension NFImageView {
         if let receipt = requestReceipt {
             receipt.request.cancel()
             if let canceledURLRequest = receipt.request.request?.url {
-                NFImageCacheAPI.shared.imageDownloadQueue.async(execute: {
+                NFImageCacheAPI.shared.downloadQueue.async(execute: {
                     let _ = NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
                 })
             }
@@ -88,7 +88,7 @@ extension NFImageView {
         if let receipt = requestReceipt {
             receipt.request.cancel()
             if let canceledURLRequest = receipt.request.request?.url {
-                NFImageCacheAPI.shared.imageDownloadQueue.async(execute: {
+                NFImageCacheAPI.shared.downloadQueue.async(execute: {
                     let _ = NFImageCacheAPI.shared.download(imageURL: canceledURLRequest)
                 })
             }
