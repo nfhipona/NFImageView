@@ -1,6 +1,7 @@
 # NFImageView
 
 [Demo Video](https://youtu.be/TgG3O_r9CYw)
+[Demo Video v0.2.*](https://youtu.be/ah2y3l9ipBI)
 
 - [x] Realtime loading progress.
 - [x] Loading option with progress or spinner.
