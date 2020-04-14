@@ -13,9 +13,9 @@
 
 ## Requirements
 
-- iOS 10.0+
+- iOS 13.0+
 - Xcode 11+
-- Swift 5
+- Swift 5.1+
 
 ## Installation
 
@@ -24,7 +24,7 @@ NFImageView is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-platform :ios, '10.0'
+platform :ios, '13.0'
 use_frameworks! # remove this if this will be used in ObjC code.
 
 pod "NFImageView"
