@@ -209,12 +209,12 @@ class ViewController: UIViewController {
         imageView.contentViewFill = .Center
     }
     
-    func changeMode(imageView: NFImageView, mode: ViewContentMode) {
+    func changeMode(imageView: NFImageView, mode: NFImageView.ContentMode) {
         
         imageView.contentViewMode = mode
     }
     
-    func changeFill(imageView: NFImageView, fill: ViewContentFill) {
+    func changeFill(imageView: NFImageView, fill: NFImageView.ContentFill) {
         
         imageView.contentViewFill = fill
     }
