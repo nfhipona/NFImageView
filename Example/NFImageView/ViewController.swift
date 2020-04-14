@@ -45,6 +45,13 @@ class ViewController: UIViewController {
             self.changeFill(imageView: self.imageView4, fill: .Right)
         }
         
+        let topFill = UIAlertAction(title: "Top Fill", style: .default) { _ in
+            self.changeFill(imageView: self.imageView1, fill: .Top)
+            self.changeFill(imageView: self.imageView2, fill: .Top)
+            self.changeFill(imageView: self.imageView3, fill: .Top)
+            self.changeFill(imageView: self.imageView4, fill: .Top)
+        }
+
         let bottomFill = UIAlertAction(title: "Bottom Fill", style: .default) { _ in
             self.changeFill(imageView: self.imageView1, fill: .Bottom)
             self.changeFill(imageView: self.imageView2, fill: .Bottom)
@@ -85,6 +92,7 @@ class ViewController: UIViewController {
         alertController.addAction(centerFill)
         alertController.addAction(leftFill)
         alertController.addAction(rightFill)
+        alertController.addAction(topFill)
         alertController.addAction(bottomFill)
         alertController.addAction(topLeft)
         alertController.addAction(topRight)
@@ -169,14 +177,14 @@ class ViewController: UIViewController {
         // using highlighted image and setting 'contentViewMode' and 'contentViewFill'
         
         imageView3.loadingEnabled = false
-        imageView3.image = UIImage(named: "smartphone")
+        imageView3.image = UIImage(named: "music")
         
         // highlighted after 3s delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        /*DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.imageView3.highlighted = true
             self.imageView3.tintColor = .red
-            self.imageView3.highlightedImage = UIImage(named: "smartphone") // UIImage(named: "TestImage")
-        }
+            self.imageView3.highlightedImage = UIImage(named: "music") // UIImage(named: "TestImage")
+        }*/
 
         imageView4.loadingType = .progress
         imageView4.setThumbImageAndLargeImage(fromURLString: thumbnail, largeURLString: largeImage)
