@@ -10,6 +10,43 @@ import Foundation
 import UIKit
 import AlamofireImage
 
+// MARK: - Enum
+
+extension NFImageView {
+    
+    public enum ContentMode: Int {
+        
+        case fill // will fill the entire bounds
+        case aspectFit // contents scaled to fit with fixed aspect. remainder is transparent
+        case aspectFill // contents scaled to fill with fixed aspect. some portion of content may be clipped.
+        case originalSize // image size is retained
+    }
+
+    public struct ContentFill: OptionSet {
+        public let rawValue: Int
+        public init(rawValue: Int) { self.rawValue = rawValue }
+        
+        /// The option to align the content to the center.
+        public static let Center = ContentFill([])
+        /// The option to align the content to the left.
+        public static let Left = ContentFill(rawValue: 1)
+        /// The option to align the content to the right.
+        public static let Right = ContentFill(rawValue: 2)
+        /// The option to align the content to the top.s
+        public static let Top = ContentFill(rawValue: 4)
+        /// The option to align the content to the bottom.
+        public static let Bottom = ContentFill(rawValue: 8)
+        /// The option to align the content to the top left.
+        public static let TopLeft: ContentFill = [Top, Left]
+        /// The option to align the content to the top right.
+        public static let TopRight: ContentFill = [Top, Right]
+        /// The option to align the content to the bottom left.
+        public static let BottomLeft: ContentFill = [Bottom, Left]
+        /// The option to align the content to the bottom right.
+        public static let BottomRight: ContentFill = [Bottom, Right]
+    }
+}
+
 @IBDesignable
 open class NFImageView: UIView {
     
@@ -31,11 +68,11 @@ open class NFImageView: UIView {
     
     // MARK: - Public property
     
-    open var contentViewMode: ViewContentMode = .aspectFill {
+    open var contentViewMode: ContentMode = .aspectFill {
         didSet { setNeedsDisplay() }
     }
     
-    open var contentViewFill: ViewContentFill = .Center {
+    open var contentViewFill: ContentFill = .Center {
         didSet { setNeedsDisplay() }
     }
     
@@ -175,7 +212,7 @@ open class NFImageView: UIView {
         let loadingIndicatorFrame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
         let loadingIndicator = UIActivityIndicatorView(frame: loadingIndicatorFrame)
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = .gray
+        loadingIndicator.style = .medium
         
         addSubview(loadingIndicator)
         bringSubviewToFront(loadingIndicator)
