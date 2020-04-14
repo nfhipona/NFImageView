@@ -1,14 +1,14 @@
 PODS:
-  - Alamofire (4.9.1)
-  - AlamofireImage (3.5.2):
-    - Alamofire (~> 4.8)
-  - NFImageView (0.2.1):
-    - Alamofire
-    - AlamofireImage
+  - Alamofire (5.1.0)
+  - AlamofireImage (4.1.0):
+    - Alamofire (~> 5.1)
+  - NFImageView (0.2.2):
+    - Alamofire (~> 5.1)
+    - AlamofireImage (~> 4.1)
 
 DEPENDENCIES:
-  - Alamofire
-  - AlamofireImage
+  - Alamofire (~> 5.1)
+  - AlamofireImage (~> 4.1)
   - NFImageView (from `../`)
 
 SPEC REPOS:
@@ -21,10 +21,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
-  NFImageView: 5e4edc43384d97bc27c0015067825af1c69581a8
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
+  NFImageView: 9aad9cf960e3a562830ab19d00c1a3ef93cc88ff
 
-PODFILE CHECKSUM: 440eb4fe532b715aec538f50c451328ac1d495cb
+PODFILE CHECKSUM: 42c1d32d0feba3a98eefb192fa433a6b2e0fe985
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

@@ -1,11 +1,12 @@
+platform :ios, '13.0'
 use_frameworks!
 
 source 'https://github.com/CocoaPods/Specs.git' #include this if you will be referencing any public pods!
 
 target 'NFImageView_Example' do
   pod 'NFImageView', :path => '../'
-  pod 'Alamofire'
-  pod 'AlamofireImage'
+  pod 'Alamofire', '~> 5.1'
+  pod 'AlamofireImage', '~> 4.1'
 
   target 'NFImageView_Tests' do
     inherit! :search_paths
