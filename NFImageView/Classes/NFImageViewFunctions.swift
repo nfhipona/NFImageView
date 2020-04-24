@@ -71,16 +71,20 @@ extension NFImageView {
     /**
      * Set image from image URL string
      */
-    public func setImage(fromURLString URLString: String, completion: NFImageViewRequestCompletion? = nil) {
+    public func setImage(fromURLString URLString: String, placeholder: UIImage? = nil, completion: NFImageViewRequestCompletion? = nil) {
+        
         if !URLString.isEmpty, let imageURL = URL(string: URLString) {
-            setImage(fromURL: imageURL, completion: completion)
+            setImage(fromURL: imageURL, placeholder: placeholder, completion: completion)
+        }else{
+            image = placeholder
         }
     }
     
     /**
      * Set image from image URL
      */
-    public func setImage(fromURL imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
+    public func setImage(fromURL imageURL: URL, placeholder: UIImage? = nil, completion: NFImageViewRequestCompletion? = nil) {
+        image = placeholder
         
         if !loadingEnabled {
             loadImage(fromURL: imageURL, completion: completion)
@@ -98,7 +102,7 @@ extension NFImageView {
     /**
      * Set thumbnail and large image from URL sting with blur effect transition
      */
-    public func setThumbImageAndLargeImage(fromURLString thumbURLString: String, largeURLString: String, completion: NFImageViewRequestCompletion? = nil) {
+    public func setThumbImageAndLargeImage(fromURLString thumbURLString: String, largeURLString: String, placeholder: UIImage? = nil, completion: NFImageViewRequestCompletion? = nil) {
         
         if !thumbURLString.isEmpty && !largeURLString.isEmpty, let thumbURL = URL(string: thumbURLString), let largeURL = URL(string: largeURLString) {
             
@@ -111,15 +115,18 @@ extension NFImageView {
                     let _ = NFImageCacheAPI.shared.download(imageURL: largeURL)
                 })
             }else{
-                setThumbImageAndLargeImage(fromURL: thumbURL, largeURL: largeURL, completion: completion)
+                setThumbImageAndLargeImage(fromURL: thumbURL, largeURL: largeURL, placeholder: placeholder, completion: completion)
             }
+        }else{
+            image = placeholder
         }
     }
     
     /**
      * Set thumbnail and large image from URL with blur effect transition
      */
-    public func setThumbImageAndLargeImage(fromURL thumbURL: URL, largeURL: URL, completion: NFImageViewRequestCompletion? = nil) {
+    public func setThumbImageAndLargeImage(fromURL thumbURL: URL, largeURL: URL, placeholder: UIImage? = nil, completion: NFImageViewRequestCompletion? = nil) {
+        image = placeholder
         
         if !loadingEnabled {
             loadImage(fromURL: thumbURL, completion: { (code, error) in
