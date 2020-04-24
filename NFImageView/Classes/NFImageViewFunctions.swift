@@ -111,7 +111,7 @@ extension NFImageView {
                     let _ = NFImageCacheAPI.shared.download(imageURL: largeURL)
                 })
             }else{
-                setThumbImageAndLargeImage(fromURL: thumbURL, largeURL: largeURL)
+                setThumbImageAndLargeImage(fromURL: thumbURL, largeURL: largeURL, completion: completion)
             }
         }
     }
