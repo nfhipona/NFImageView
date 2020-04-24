@@ -33,7 +33,8 @@ extension RequestReceipt {
 
 extension NFImageView {
     
-    internal func loadWithSpinner(imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
+    internal func cancelReceipt() {
+        
         if let receipt = requestReceipt {
             receipt.cancel()
             
@@ -44,7 +45,11 @@ extension NFImageView {
             }
             requestReceipt = nil
         }
+    }
+    
+    internal func loadWithSpinner(imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
         
+        cancelReceipt()
         forceStartLoadingState()
         
         requestReceipt = NFImageCacheAPI.shared.download(imageURL: imageURL, completion: { (response) in
@@ -69,17 +74,9 @@ extension NFImageView {
     }
     
     internal func loadWithProgress(imageURL: URL, shouldContinueLoading: Bool = false, completion: NFImageViewRequestCompletion? = nil) {
-        if let receipt = requestReceipt {
-            receipt.cancel()
-            
-            if let canceledURL = receipt.request.url {
-                NFImageCacheAPI.shared.downloadQueue.async(execute: {
-                    let _ = NFImageCacheAPI.shared.download(imageURL: canceledURL)
-                })
-            }
-            requestReceipt = nil
-        }
         
+        
+        cancelReceipt()
         forceStartLoadingState()
         
         requestReceipt = NFImageCacheAPI.shared.downloadWithProgress(imageURL: imageURL, progress: { (progress) in
@@ -116,16 +113,8 @@ extension NFImageView {
      * Use when loading is disabled
      */
     internal func loadImage(fromURL imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
-        if let receipt = requestReceipt {
-            receipt.cancel()
-            
-            if let canceledURL = receipt.request.url {
-                NFImageCacheAPI.shared.downloadQueue.async(execute: {
-                    let _ = NFImageCacheAPI.shared.download(imageURL: canceledURL)
-                })
-            }
-            requestReceipt = nil
-        }
+        
+        cancelReceipt()
         
         requestReceipt = NFImageCacheAPI.shared.download(imageURL: imageURL, completion: { (response) in
             
