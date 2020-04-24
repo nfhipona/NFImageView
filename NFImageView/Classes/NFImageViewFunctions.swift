@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-// MARK: - Public Functions
+// MARK: - Public Functions - Loaders
 
 extension NFImageView {
-
+    
     /**
      * Force starting image loading
      */
@@ -62,6 +62,11 @@ extension NFImageView {
     public func cancelLoadImageRequest() {
         requestReceipt?.request.cancel()
     }
+}
+
+// MARK: - Public Functions - Image Setters
+
+extension NFImageView {
     
     /**
      * Set image from image URL string
