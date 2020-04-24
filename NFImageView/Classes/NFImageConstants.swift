@@ -20,7 +20,6 @@ public enum NFImageViewRequestCode: Int {
     case unknown
     case success = 4776
     case canceled = -999
-    
 }
 
 public typealias NFImageViewRequestCompletion = (_ code: NFImageViewRequestCode, _ error: NSError?) -> Void
