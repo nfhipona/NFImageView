@@ -50,21 +50,19 @@ extension NFImageView {
     internal func loadWithSpinner(imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
         
         cancelReceipt()
-        forceStartLoadingState()
-        
+
         requestReceipt = NFImageCacheAPI.shared.download(imageURL: imageURL, completion: { (response) in
             
             switch response.result {
                 
             case .success(let value):
-                self.forceStopLoadingState()
-                
+
                 self.image = value
                 completion?(.success, nil)
                 
             case .failure(let error):
+                
                 if let errorCode = response.response?.statusCode, errorCode != NFImageViewRequestCode.canceled.rawValue {
-                    self.forceStopLoadingState()
                     completion?(.unknown, error as NSError?)
                 }else{
                     completion?(.canceled, error as NSError?)
@@ -73,11 +71,9 @@ extension NFImageView {
         })
     }
     
-    internal func loadWithProgress(imageURL: URL, shouldContinueLoading: Bool = false, completion: NFImageViewRequestCompletion? = nil) {
-        
+    internal func loadWithProgress(imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
         
         cancelReceipt()
-        forceStartLoadingState()
         
         requestReceipt = NFImageCacheAPI.shared.downloadWithProgress(imageURL: imageURL, progress: { (progress) in
             
@@ -88,19 +84,13 @@ extension NFImageView {
             switch response.result {
                 
             case .success(let value):
-                if !shouldContinueLoading {
-                    self.forceStopLoadingState()
-                }
                 
                 self.image = value
                 completion?(.success, nil)
                 
             case .failure(let error):
+                
                 if let errorCode = response.response?.statusCode, errorCode != NFImageViewRequestCode.canceled.rawValue {
-                    if !shouldContinueLoading {
-                        self.forceStopLoadingState()
-                    }
-                    
                     completion?(.unknown, error as NSError?)
                 }else{
                     completion?(.canceled, error as NSError?)
@@ -121,10 +111,12 @@ extension NFImageView {
             switch response.result {
                 
             case .success(let value):
+                
                 self.image = value
                 completion?(.success, nil)
                 
             case .failure(let error):
+                
                 if let errorCode = response.response?.statusCode, errorCode != NFImageViewRequestCode.canceled.rawValue {
                     completion?(.unknown, error as NSError?)
                 }else{

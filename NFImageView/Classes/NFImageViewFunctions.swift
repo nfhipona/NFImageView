@@ -16,8 +16,10 @@ extension NFImageView {
     /**
      * Force starting image loading
      */
-    public func forceStartLoadingState() {
+    public func forceStartLoadingState(isBlurEnabled: Bool = false) {
         if !loadingEnabled { return }
+        
+        blurEffect.isHidden = !isBlurEnabled
         
         switch loadingType {
         case .progress:
@@ -40,6 +42,8 @@ extension NFImageView {
     public func forceStopLoadingState() {
         if !loadingEnabled { return }
         
+        blurEffect.isHidden = true
+        
         switch loadingType {
         case .progress:
             
@@ -47,8 +51,8 @@ extension NFImageView {
             loadingProgressView.setProgress(0.0, animated: true)
             UIView.animate(withDuration: 0.25, animations: {
                 self.loadingProgressView.alpha = 0.0
-                }, completion: { _ in
-                    self.loadingProgressView.isHidden = true
+            }, completion: { _ in
+                self.loadingProgressView.isHidden = true
             })
             
         default:
@@ -89,12 +93,20 @@ extension NFImageView {
         if !loadingEnabled {
             loadImage(fromURL: imageURL, completion: completion)
         }else{
+            forceStartLoadingState()
+            
             switch loadingType {
             case .progress:
-                loadWithProgress(imageURL: imageURL, completion: completion)
+                loadWithProgress(imageURL: imageURL) { (code, error) in
+                    self.forceStopLoadingState()
+                    completion?(code, error)
+                }
                 
             default:
-                loadWithSpinner(imageURL: imageURL, completion: completion)
+                loadWithSpinner(imageURL: imageURL) { (code, error) in
+                    self.forceStopLoadingState()
+                    completion?(code, error)
+                }
             }
         }
     }
@@ -130,7 +142,7 @@ extension NFImageView {
         
         if !loadingEnabled {
             loadImage(fromURL: thumbURL, completion: { (code, error) in
-                if code == .success {
+                if code != .canceled {
                     self.loadImage(fromURL: largeURL, completion: { (code, error) in
                         completion?(code, error)
                     })
@@ -139,33 +151,31 @@ extension NFImageView {
                 }
             })
         }else{
-            blurEffect.isHidden = false
+            forceStartLoadingState(isBlurEnabled: true)
             
             switch loadingType {
             case .progress:
-                loadWithProgress(imageURL: thumbURL, shouldContinueLoading: true, completion: { (code, error) in
-                    if code == .success {
+                loadWithProgress(imageURL: thumbURL, completion: { (code, error) in
+                    if code != .canceled {
                         self.loadWithProgress(imageURL: largeURL, completion: { (code, error) in
-                            
-                            self.blurEffect.isHidden = true
+                            self.forceStopLoadingState()
                             completion?(code, error)
                         })
                     }else{
-                        self.blurEffect.isHidden = true
+                        self.forceStopLoadingState()
                         completion?(code, error)
                     }
                 })
                 
             default:
                 loadWithSpinner(imageURL: thumbURL, completion: { (code, error) in
-                    if code == .success {
+                    if code != .canceled {
                         self.loadWithSpinner(imageURL: largeURL, completion: { (code, error) in
-                            
-                            self.blurEffect.isHidden = true
+                            self.forceStopLoadingState()
                             completion?(code, error)
                         })
                     }else{
-                        self.blurEffect.isHidden = true
+                        self.forceStopLoadingState()
                         completion?(code, error)
                     }
                 })
