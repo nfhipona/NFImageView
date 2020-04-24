@@ -161,6 +161,8 @@ class ViewController: UIViewController {
         // NOTE: Test with network conditioner to fully see the effect.
         // Delete app after first load if you want to retest or image from cache will be used.
         
+        let placeholder = UIImage(named: "placeholder")
+        
         // used for image view with blur effect
         let thumbnail = "https://images8.alphacoders.com/687/687125.jpg"
         let largeImage = "https://images2.alphacoders.com/704/704946.jpg"
@@ -188,6 +190,7 @@ class ViewController: UIViewController {
 
         imageView4.loadingType = .progress
         imageView4.setThumbImageAndLargeImage(fromURLString: thumbnail, largeURLString: largeImage)
+        // imageView4.setThumbImageAndLargeImage(fromURLString: thumbnail, largeURLString: largeImage, placeholder: placeholder)
         
         /*
         imageView1.setImage(fromURL: <#T##URL#>)
