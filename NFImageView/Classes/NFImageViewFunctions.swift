@@ -57,9 +57,9 @@ extension NFImageView {
     }
     
     /**
-     * Stop issued image download request
+     * Stop issued image load request
      */
-    public func cancelLoadImageRequest() {
+    public func cancelImageLoadRequest() {
         requestReceipt?.request.cancel()
     }
 }
