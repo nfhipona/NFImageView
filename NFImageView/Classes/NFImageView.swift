@@ -148,7 +148,7 @@ open class NFImageView: UIView {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
         // clears the view if there is no image to draw
-        guard let image = highlighted ? highlightedImage : image else { return context.clear(rect) }
+        guard let image = highlighted ? highlightedImage : image else { return }
         
         // get content rect
         let contentRect = contentModeRect(forImage: image)
