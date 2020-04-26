@@ -92,6 +92,26 @@ imageView.contentViewFill = .Center || .Top || .Left || .Right || .Bottom
 
 ```
 
+### Workaround for IBDesignable causing issues for  `render and update auto layout status`  causing the storyboard to be unusable.  
+
+Add this script to your `Podfile`: 
+Source: ``https://github.com/CocoaPods/CocoaPods/issues/5334``
+
+```Podfile
+
+# Workaround for @IBDesignable
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    next if target.product_type == "com.apple.product-type.bundle"
+    target.build_configurations.each do |config|
+      config.build_settings['CONFIGURATION_BUILD_DIR'] = '$PODS_CONFIGURATION_BUILD_DIR'
+    end
+  end
+end
+
+```
+
 ## Contribute
 We would love for you to contribute to `NFImageView`. See the [LICENSE](https://github.com/nferocious76/NFImageView/blob/master/LICENSE) file for more info.
 
