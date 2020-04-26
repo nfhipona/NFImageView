@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NFImageView'
-  s.version          = '0.2.4'
+  s.version          = '0.2.5'
   s.swift_version    = '5'
   s.summary          = "'NFImageView' is a subclass of a UIView that acts like a UIImageView. Uses CoreGraphics to draw image."
 
