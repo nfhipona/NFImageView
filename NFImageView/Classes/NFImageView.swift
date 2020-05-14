@@ -66,35 +66,36 @@ open class NFImageView: UIView {
     
     internal var requestReceipt: RequestReceipt?
     
+    
     // MARK: - Public property
     
-    open var contentViewMode: ContentMode = .aspectFill {
+    public var contentViewMode: ContentMode = .aspectFill {
         didSet { setNeedsDisplay() }
     }
     
-    open var contentViewFill: ContentFill = .Center {
+    public var contentViewFill: ContentFill = .Center {
         didSet { setNeedsDisplay() }
     }
     
-    open var loadingType: NFImageViewLoadingType = .default {
+    public var loadingType: NFImageViewLoadingType = .default {
         didSet { setNeedsDisplay() }
     }
     
     // MARK: - IBInspectables
     
-    @IBInspectable open var loadingEnabled: Bool = true
+    @IBInspectable public var loadingEnabled: Bool = true
     
-    @IBInspectable open var highlighted: Bool = false {
+    @IBInspectable public var highlighted: Bool = false {
         didSet { setNeedsDisplay() }
     }
     
     // default is nil
-    @IBInspectable open var image: UIImage? {
+    @IBInspectable public var image: UIImage? {
         didSet { setNeedsDisplay() }
     }
     
     // default is nil
-    @IBInspectable open var highlightedImage: UIImage? {
+    @IBInspectable public var highlightedImage: UIImage? {
         didSet { setNeedsDisplay() }
     }
     
@@ -131,19 +132,17 @@ open class NFImageView: UIView {
         super.awakeFromNib()
         
         backgroundColor = .clear
-        isUserInteractionEnabled = false
-        
-        setNeedsDisplay()
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
+        
         setNeedsDisplay()
     }
     
     // MARK: - Drawing
     
-    open override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
@@ -199,10 +198,6 @@ open class NFImageView: UIView {
         
         // restores the graphics state
         context.restoreGState()
-    }
-    
-    open override func tintColorDidChange() {
-        setNeedsDisplay()
     }
     
     // MARK: - Loaders Setup
