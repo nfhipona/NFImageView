@@ -62,6 +62,19 @@ imageView.setThumbImageAndLargeImage(fromURLString: <#T##String#>, largeURLStrin
 
 ## Usage example
 
+#### `Optional Configuration`
+```Swift
+
+// set capacity
+NFImageCacheAPI.shared.setCapacity(memoryCapacity: 200 * 1024 * 1024, preferredMemoryUsageAfterPurge: 80 * 1024 * 1024)
+
+// it is nescessary to configure `imageCache` with `setCapacity(memoryCapacity: UInt64, preferredMemoryUsageAfterPurge: UInt64)`
+// before creating new downloader configuration and not vice versa or else it will not be registered to the downloader
+// and it will use the default
+NFImageCacheAPI.shared.createDownloader(downloadPrioritization: .fifo, maximumActiveDownloads: 10)
+
+```
+
 ```Swift
 
 // link of images
