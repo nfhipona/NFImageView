@@ -21,7 +21,7 @@ public class NFImageCacheAPI: NSObject {
     fileprivate lazy var imageCache: AutoPurgingImageCache = {
         AutoPurgingImageCache(memoryCapacity: 150 * 1024 * 1024, preferredMemoryUsageAfterPurge: 60 * 1024 * 1024)
     }()
-
+    
     fileprivate lazy var downloader: ImageDownloader = {
         ImageDownloader(configuration: ImageDownloader.defaultURLSessionConfiguration(), downloadPrioritization: .lifo, maximumActiveDownloads: 4, imageCache: self.imageCache)
     }()
@@ -29,11 +29,19 @@ public class NFImageCacheAPI: NSObject {
     // MARK: - Public Functions
     
     /**
-    * Set image cache capacity. The `memoryCapacity` must be greater than or equal to `preferredMemoryUsageAfterPurge`
-    */
+     * Set image cache capacity. The `memoryCapacity` must be greater than or equal to `preferredMemoryUsageAfterPurge`
+     */
     public func setCapacity(memoryCapacity: UInt64 = 150 * 1024 * 1024, preferredMemoryUsageAfterPurge: UInt64 = 60 * 1024 * 1024) {
         
         imageCache = AutoPurgingImageCache(memoryCapacity: memoryCapacity, preferredMemoryUsageAfterPurge: preferredMemoryUsageAfterPurge)
+    }
+    
+    /**
+     * Create `downloader` with user's configuration. Defaults `configuration` =  `defaultURLSessionConfiguration`, `priority` = `lifo` . NOTE: Configure `imageCache` with `setCapacity(memoryCapacity: UInt64, preferredMemoryUsageAfterPurge: UInt64)` or leave it as default: `memoryCapacity: 150 * 1024 * 1024, preferredMemoryUsageAfterPurge: 60 * 1024 * 1024`
+     */
+    public func createDownloader(configuration: URLSessionConfiguration = ImageDownloader.defaultURLSessionConfiguration(), downloadPrioritization priority: ImageDownloader.DownloadPrioritization = .lifo, maximumActiveDownloads activeDownloads: Int) {
+        
+        downloader = ImageDownloader(configuration: configuration, downloadPrioritization: priority, maximumActiveDownloads: activeDownloads, imageCache: self.imageCache)
     }
     
     /**
