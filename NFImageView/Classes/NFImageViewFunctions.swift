@@ -86,6 +86,8 @@ extension NFImageView {
                 NFImageCacheAPI.shared.downloadQueue.async(execute: {
                     let _ = NFImageCacheAPI.shared.download(imageURL: imageURL)
                 })
+                
+                completion?(.success, nil)
             }else{
                 setImage(fromURL: imageURL, placeholder: placeholder, completion: completion)
             }
@@ -135,6 +137,8 @@ extension NFImageView {
                 NFImageCacheAPI.shared.downloadQueue.async(execute: {
                     let _ = NFImageCacheAPI.shared.download(imageURL: largeURL)
                 })
+                
+                completion?(.success, nil)
             }else{
                 setThumbImageAndLargeImage(fromURL: thumbURL, largeURL: largeURL, placeholder: placeholder, completion: completion)
             }
