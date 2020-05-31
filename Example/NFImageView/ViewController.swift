@@ -187,11 +187,15 @@ class ViewController: UIViewController {
         imageView3.image = UIImage(named: "music")
         
         // highlighted after 3s delay
-        /*DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.imageView3.highlighted = true
-            self.imageView3.tintColor = .red
-            self.imageView3.highlightedImage = UIImage(named: "music") // UIImage(named: "TestImage")
-        }*/
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            self.imageView3.highlighted = true
+//            self.imageView3.tintColor = .red
+//            self.imageView3.highlightedImage = UIImage(named: "music") // UIImage(named: "TestImage")
+            
+            // test cached image
+            self.imageView3.loadingType = .spinner
+            self.imageView3.setImage(fromURLString: largeImageSpinner)
+        }
 
         imageView4.loadingType = .progress
         imageView4.setThumbImageAndLargeImage(fromURLString: thumbnail, largeURLString: largeImage)
