@@ -109,13 +109,13 @@ extension NFImageView {
             
             switch loadingType {
             case .progress:
-                loadWithProgress(imageURL: imageURL) { (code, error) in
+                loadWithProgress(imageURL: imageURL) { [unowned self] (code, error) in
                     self.forceStopLoadingState()
                     completion?(code, error)
                 }
                 
             default:
-                loadWithSpinner(imageURL: imageURL) { (code, error) in
+                loadWithSpinner(imageURL: imageURL) { [unowned self] (code, error) in
                     self.forceStopLoadingState()
                     completion?(code, error)
                 }
@@ -154,7 +154,7 @@ extension NFImageView {
         image = placeholder
         
         if !loadingEnabled {
-            loadImage(fromURL: thumbURL, completion: { (code, error) in
+            loadImage(fromURL: thumbURL, completion: { [unowned self] (code, error) in
                 if code != .canceled {
                     self.loadImage(fromURL: largeURL, completion: { (code, error) in
                         completion?(code, error)
@@ -168,9 +168,9 @@ extension NFImageView {
             
             switch loadingType {
             case .progress:
-                loadWithProgress(imageURL: thumbURL, completion: { (code, error) in
+                loadWithProgress(imageURL: thumbURL, completion: { [unowned self] (code, error) in
                     if code != .canceled {
-                        self.loadWithProgress(imageURL: largeURL, completion: { (code, error) in
+                        self.loadWithProgress(imageURL: largeURL, completion: { [unowned self] (code, error) in
                             self.forceStopLoadingState()
                             completion?(code, error)
                         })
@@ -181,9 +181,9 @@ extension NFImageView {
                 })
                 
             default:
-                loadWithSpinner(imageURL: thumbURL, completion: { (code, error) in
+                loadWithSpinner(imageURL: thumbURL, completion: { [unowned self] (code, error) in
                     if code != .canceled {
-                        self.loadWithSpinner(imageURL: largeURL, completion: { (code, error) in
+                        self.loadWithSpinner(imageURL: largeURL, completion: { [unowned self] (code, error) in
                             self.forceStopLoadingState()
                             completion?(code, error)
                         })
