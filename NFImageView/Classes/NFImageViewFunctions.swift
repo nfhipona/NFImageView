@@ -78,7 +78,17 @@ extension NFImageView {
     public func setImage(fromURLString URLString: String, placeholder: UIImage? = nil, completion: NFImageViewRequestCompletion? = nil) {
         
         if !URLString.isEmpty, let imageURL = URL(string: URLString) {
-            setImage(fromURL: imageURL, placeholder: placeholder, completion: completion)
+            
+            if let cachedImage = NFImageCacheAPI.shared.imageContentInCacheStorage(forURL: imageURL) {
+                image = cachedImage
+                
+                // update cache for url request
+                NFImageCacheAPI.shared.downloadQueue.async(execute: {
+                    let _ = NFImageCacheAPI.shared.download(imageURL: imageURL)
+                })
+            }else{
+                setImage(fromURL: imageURL, placeholder: placeholder, completion: completion)
+            }
         }else{
             image = placeholder
         }
@@ -123,7 +133,6 @@ extension NFImageView {
                 
                 // update cache for url request
                 NFImageCacheAPI.shared.downloadQueue.async(execute: {
-                    let _ = NFImageCacheAPI.shared.download(imageURL: thumbURL)
                     let _ = NFImageCacheAPI.shared.download(imageURL: largeURL)
                 })
             }else{

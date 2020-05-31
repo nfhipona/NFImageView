@@ -41,7 +41,7 @@ public class NFImageCacheAPI: NSObject {
      */
     public func createDownloader(configuration: URLSessionConfiguration = ImageDownloader.defaultURLSessionConfiguration(), downloadPrioritization priority: ImageDownloader.DownloadPrioritization = .lifo, maximumActiveDownloads activeDownloads: Int) {
         
-        downloader = ImageDownloader(configuration: configuration, downloadPrioritization: priority, maximumActiveDownloads: activeDownloads, imageCache: self.imageCache)
+        downloader = ImageDownloader(configuration: configuration, downloadPrioritization: priority, maximumActiveDownloads: activeDownloads, imageCache: imageCache)
     }
     
     /**
