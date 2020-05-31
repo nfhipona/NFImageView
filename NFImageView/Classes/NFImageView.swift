@@ -45,6 +45,18 @@ extension NFImageView {
         /// The option to align the content to the bottom right.
         public static let BottomRight: ContentFill = [Bottom, Right]
     }
+    
+    internal enum ProgressType: Int {
+        
+        case `default`
+        
+        /// Original full sized image
+        case image
+        /// Thumbnail image
+        case thumbnail
+        /// Large image, used along with thumbnail
+        case still
+    }
 }
 
 @IBDesignable
@@ -56,6 +68,7 @@ open class NFImageView: UIView {
         return self.prepareLoadingIndicator()
     }()
     
+    internal var progressType: ProgressType = .default
     internal lazy var loadingProgressView: UIProgressView = {
         return self.prepareLoadingProgressView()
     }()
@@ -229,7 +242,6 @@ open class NFImageView: UIView {
         progressView.progressTintColor = .cyan
         progressView.trackTintColor = .lightGray
         progressView.isHidden = true
-        progressView.alpha = 0.0
         
         addSubview(progressView)
         bringSubviewToFront(progressView)

@@ -22,14 +22,10 @@ extension NFImageView {
         blurEffect.isHidden = !isBlurEnabled
         
         switch loadingType {
-        case .progress:
-            loadingProgressView.isHidden = false
-            loadingProgressView.progress = 0.0
-            loadingProgressView.alpha = 0.0
             
-            UIView.animate(withDuration: 0.25, animations: {
-                self.loadingProgressView.alpha = 1.0
-            })
+        case .progress:
+            loadingProgressView.progress = 0.0
+            loadingProgressView.isHidden = false
             
         default:
             loadingIndicator.startAnimating()
@@ -45,15 +41,10 @@ extension NFImageView {
         blurEffect.isHidden = true
         
         switch loadingType {
-        case .progress:
             
-            loadingProgressView.alpha = 1.0
-            loadingProgressView.setProgress(0.0, animated: true)
-            UIView.animate(withDuration: 0.25, animations: {
-                self.loadingProgressView.alpha = 0.0
-            }, completion: { _ in
-                self.loadingProgressView.isHidden = true
-            })
+        case .progress:
+            progressType = .default
+            loadingProgressView.isHidden = true
             
         default:
             loadingIndicator.stopAnimating()
@@ -109,6 +100,7 @@ extension NFImageView {
             
             switch loadingType {
             case .progress:
+                progressType = .image
                 loadWithProgress(imageURL: imageURL) { [unowned self] (code, error) in
                     self.forceStopLoadingState()
                     completion?(code, error)
@@ -168,8 +160,10 @@ extension NFImageView {
             
             switch loadingType {
             case .progress:
+                progressType = .thumbnail
                 loadWithProgress(imageURL: thumbURL, completion: { [unowned self] (code, error) in
                     if code != .canceled {
+                        self.progressType = .still
                         self.loadWithProgress(imageURL: largeURL, completion: { [unowned self] (code, error) in
                             self.forceStopLoadingState()
                             completion?(code, error)

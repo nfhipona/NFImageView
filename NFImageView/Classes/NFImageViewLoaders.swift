@@ -77,7 +77,20 @@ extension NFImageView {
         
         requestReceipt = NFImageCacheAPI.shared.downloadWithProgress(imageURL: imageURL, progress: { (progress) in
             
-            self.loadingProgressView.setProgress(Float(progress.fractionCompleted), animated: true)
+            switch self.progressType {
+
+            case .thumbnail:
+                let thumbProgress = progress.fractionCompleted / 2
+                self.loadingProgressView.setProgress(Float(thumbProgress), animated: true)
+                
+            case .still:
+                let stillProgress = 0.5 + (progress.fractionCompleted / 2)
+                self.loadingProgressView.setProgress(Float(stillProgress), animated: true)
+
+            default: // .image
+                self.loadingProgressView.setProgress(Float(progress.fractionCompleted), animated: true)
+                
+            }
             
         }) { (response) in
             
