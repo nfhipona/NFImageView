@@ -48,8 +48,6 @@ extension NFImageView {
     }
     
     internal func loadWithSpinner(imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
-        
-        cancelReceipt()
 
         requestReceipt = NFImageCacheAPI.shared.download(imageURL: imageURL, completion: { (response) in
             
@@ -72,9 +70,7 @@ extension NFImageView {
     }
     
     internal func loadWithProgress(imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
-        
-        cancelReceipt()
-        
+
         requestReceipt = NFImageCacheAPI.shared.downloadWithProgress(imageURL: imageURL, progress: { (progress) in
             
             switch self.progressType {
@@ -116,9 +112,7 @@ extension NFImageView {
      * Use when loading is disabled
      */
     internal func loadImage(fromURL imageURL: URL, completion: NFImageViewRequestCompletion? = nil) {
-        
-        cancelReceipt()
-        
+
         requestReceipt = NFImageCacheAPI.shared.download(imageURL: imageURL, completion: { (response) in
             
             switch response.result {

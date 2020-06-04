@@ -10,7 +10,6 @@ import Foundation
 
 public enum NFImageViewLoadingType: Int {
     
-    case `default`
     case spinner
     case progress
 }

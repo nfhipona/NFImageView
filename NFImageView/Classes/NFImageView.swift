@@ -77,8 +77,9 @@ open class NFImageView: UIView {
         return self.prepareVisualBlurEffectView()
     }()
     
+    internal var thumbActiveURL: URL!
+    internal var imageActiveURL: URL!
     internal var requestReceipt: RequestReceipt?
-    
     
     // MARK: - Public property
     
@@ -90,7 +91,7 @@ open class NFImageView: UIView {
         didSet { setNeedsDisplay() }
     }
     
-    public var loadingType: NFImageViewLoadingType = .default {
+    public var loadingType: NFImageViewLoadingType = .spinner {
         didSet { setNeedsDisplay() }
     }
     
@@ -149,6 +150,12 @@ open class NFImageView: UIView {
     
     open override func layoutSubviews() {
         super.layoutSubviews()
+        
+        setNeedsDisplay()
+    }
+    
+    open override func tintColorDidChange() {
+        super.tintColorDidChange()
         
         setNeedsDisplay()
     }
