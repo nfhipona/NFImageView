@@ -177,6 +177,10 @@ class ViewController: UIViewController {
         
         imageView1.loadingType = .spinner
         imageView1.setImage(fromURLString: largeImageSpinner)
+        imageView1.setImage(fromURLString: thumbnail)
+        imageView1.setImage(fromURLString: largeImage)
+        imageView1.setImage(fromURLString: largeImageProgress)
+        imageView1.setImage(fromURLString: largeImageSpinner)
         
         imageView2.loadingType = .progress
         imageView2.setImage(fromURLString: largeImageProgress)
@@ -198,6 +202,10 @@ class ViewController: UIViewController {
         }
 
         imageView4.loadingType = .progress
+        imageView4.setThumbImageAndLargeImage(fromURLString: thumbnail, largeURLString: largeImage)
+        imageView4.setThumbImageAndLargeImage(fromURLString: largeImage, largeURLString: largeImageSpinner)
+        imageView4.setThumbImageAndLargeImage(fromURLString: largeImageSpinner, largeURLString: largeImageProgress)
+        imageView4.setThumbImageAndLargeImage(fromURLString: largeImageProgress, largeURLString: thumbnail)
         imageView4.setThumbImageAndLargeImage(fromURLString: thumbnail, largeURLString: largeImage)
         // imageView4.setThumbImageAndLargeImage(fromURLString: thumbnail, largeURLString: largeImage, placeholder: placeholder)
         
