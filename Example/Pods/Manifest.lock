@@ -2,7 +2,7 @@ PODS:
   - Alamofire (5.1.0)
   - AlamofireImage (4.1.0):
     - Alamofire (~> 5.1)
-  - NFImageView (0.2.4):
+  - NFImageView (0.2.8):
     - Alamofire (~> 5.1)
     - AlamofireImage (~> 4.1)
 
@@ -23,8 +23,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
-  NFImageView: c9966734c7e00ff4a1e9af02151ec9fc7c708227
+  NFImageView: 095e86c47b0dfc37cb6f0a57f882f588e3962cea
 
 PODFILE CHECKSUM: 2c733689b0b6931c2c140fed93328627d050717d
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3
