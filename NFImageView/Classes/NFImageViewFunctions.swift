@@ -118,7 +118,9 @@ extension NFImageView {
                     
                     if code == .canceled { // if canceled or new image request has been placed
                         // reload from last active image url
-                        self.setImage(fromURL: self.imageActiveURL, placeholder: placeholder, completion: completion)
+                        guard let imageActiveURL = self.imageActiveURL else { completion?(code, error)
+                            return self.forceStopLoadingState() }
+                        self.setImage(fromURL: imageActiveURL, placeholder: placeholder, completion: completion)
                     }else{
                         self.forceStopLoadingState()
                         completion?(code, error)
@@ -131,7 +133,9 @@ extension NFImageView {
                     
                     if code == .canceled { // if canceled or new image request has been placed
                         // reload from last active image url
-                        self.setImage(fromURL: self.imageActiveURL, placeholder: placeholder, completion: completion)
+                        guard let imageActiveURL = self.imageActiveURL else { completion?(code, error)
+                            return self.forceStopLoadingState() }
+                        self.setImage(fromURL: imageActiveURL, placeholder: placeholder, completion: completion)
                     }else{
                         self.forceStopLoadingState()
                         completion?(code, error)
@@ -174,14 +178,20 @@ extension NFImageView {
             loadImage(fromURL: thumbURL, completion: { [unowned self] (code, error) in
                 
                 if code == .canceled { // if canceled or new image request has been placed
+                    guard let thumbActiveURL = self.thumbActiveURL, let imageActiveURL = self.imageActiveURL else { completion?(code, error)
+                        return self.forceStopLoadingState() }
+                    
                     // reload from last active thumb url
-                    self.setThumbImageAndLargeImage(fromURL: self.thumbActiveURL, largeURL: self.imageActiveURL, placeholder: placeholder, completion: completion)
+                    self.setThumbImageAndLargeImage(fromURL: thumbActiveURL, largeURL: imageActiveURL, placeholder: placeholder, completion: completion)
                 }else{
                     self.loadImage(fromURL: largeURL, completion: { (code, error) in
                         
                         if code == .canceled { // if canceled or new image request has been placed
+                            guard let thumbActiveURL = self.thumbActiveURL, let imageActiveURL = self.imageActiveURL else { completion?(code, error)
+                            return self.forceStopLoadingState() }
+                            
                             // reload from last active image url
-                            self.setThumbImageAndLargeImage(fromURL: self.thumbActiveURL, largeURL: self.imageActiveURL, placeholder: placeholder, completion: completion)
+                            self.setThumbImageAndLargeImage(fromURL: thumbActiveURL, largeURL: imageActiveURL, placeholder: placeholder, completion: completion)
                         }else{
                             completion?(code, error)
                         }
@@ -198,17 +208,23 @@ extension NFImageView {
                 loadWithProgress(imageURL: thumbURL, completion: { [unowned self] (code, error) in
                     
                     if code == .canceled { // if canceled or new image request has been placed
+                        guard let thumbActiveURL = self.thumbActiveURL, let imageActiveURL = self.imageActiveURL else { completion?(code, error)
+                            return self.forceStopLoadingState() }
+                        
                         // reload from last active thumb url
                         self.progressType = .thumbnail
-                        self.setThumbImageAndLargeImage(fromURL: self.thumbActiveURL, largeURL: self.imageActiveURL, placeholder: placeholder, completion: completion)
+                        self.setThumbImageAndLargeImage(fromURL: thumbActiveURL, largeURL: imageActiveURL, placeholder: placeholder, completion: completion)
                         
                     }else{
                         self.progressType = .still
                         self.loadWithProgress(imageURL: largeURL, completion: { [unowned self] (code, error) in
                             
                             if code == .canceled { // if canceled or new image request has been placed
+                                guard let thumbActiveURL = self.thumbActiveURL, let imageActiveURL = self.imageActiveURL else { completion?(code, error)
+                                    return self.forceStopLoadingState() }
+                                
                                 // reload from last active image url
-                                self.setThumbImageAndLargeImage(fromURL: self.thumbActiveURL, largeURL: self.imageActiveURL, placeholder: placeholder, completion: completion)
+                                self.setThumbImageAndLargeImage(fromURL: thumbActiveURL, largeURL: imageActiveURL, placeholder: placeholder, completion: completion)
                             }else{
                                 self.forceStopLoadingState()
                                 completion?(code, error)
@@ -222,16 +238,22 @@ extension NFImageView {
                 loadWithSpinner(imageURL: thumbURL, completion: { [unowned self] (code, error) in
                     
                     if code == .canceled { // if canceled or new image request has been placed
+                        guard let thumbActiveURL = self.thumbActiveURL, let imageActiveURL = self.imageActiveURL else { completion?(code, error)
+                            return self.forceStopLoadingState() }
+                        
                         // reload from last active thumb url
                         self.progressType = .thumbnail
-                        self.setThumbImageAndLargeImage(fromURL: self.thumbActiveURL, largeURL: self.imageActiveURL, placeholder: placeholder, completion: completion)
+                        self.setThumbImageAndLargeImage(fromURL: thumbActiveURL, largeURL: imageActiveURL, placeholder: placeholder, completion: completion)
                         
                     }else{
                         self.loadWithSpinner(imageURL: largeURL, completion: { [unowned self] (code, error) in
                             
                             if code == .canceled { // if canceled or new image request has been placed
+                                guard let thumbActiveURL = self.thumbActiveURL, let imageActiveURL = self.imageActiveURL else { completion?(code, error)
+                                    return self.forceStopLoadingState() }
+                                
                                 // reload from last active image url
-                                self.setThumbImageAndLargeImage(fromURL: self.thumbActiveURL, largeURL: self.imageActiveURL, placeholder: placeholder, completion: completion)
+                                self.setThumbImageAndLargeImage(fromURL: thumbActiveURL, largeURL: imageActiveURL, placeholder: placeholder, completion: completion)
                             }else{
                                 self.forceStopLoadingState()
                                 completion?(code, error)
